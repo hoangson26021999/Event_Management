@@ -1,6 +1,7 @@
 package com.example.event_management.controller;
 
 import com.example.event_management.service.SpringMail.MyConstants;
+import com.example.event_management.service.SpringMail.QrMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -18,16 +19,24 @@ import java.io.File;
 @Controller
 public class BaseController {
 
-    @Autowired
-    public JavaMailSender emailSender;
-
     @RequestMapping("/")
     public String index() {
-        return "index" ;
+        return "home" ;
     }
 
     @GetMapping("/login")
     public String login() { return "login" ;}
+
+    @Autowired
+    private QrMail qrmail ;
+
+    @ResponseBody
+    @RequestMapping("/sendQrCodeMail")
+    public String sendHtmlEmail() throws MessagingException {
+
+        qrmail.sendQrMail();
+        return "home";
+    }
 
 
 }
