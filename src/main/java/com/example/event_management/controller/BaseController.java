@@ -33,7 +33,6 @@ public class BaseController {
     @ResponseBody
     @RequestMapping("/sendQrCodeMail")
     public String sendHtmlEmail() throws MessagingException {
-
         qrmail.sendQrMail();
         return "home";
     }

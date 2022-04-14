@@ -25,11 +25,6 @@ public class QrCodeGenerate {
     @Value("${path}")
     private String outputFile= "src/main/resources/QrCode/QrTest4.jpg" ;
 
-    public static void main (String[] args) throws IOException {
-        QrCodeGenerate a = new QrCodeGenerate() ;
-        a.generateQrCode();
-    }
-
     public void generateQrCode () throws IOException {
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
