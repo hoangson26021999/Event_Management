@@ -1,4 +1,4 @@
-package com.example.event_management.service.SpringMail;
+package com.example.event_management.service.springmail;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

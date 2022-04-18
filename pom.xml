@@ -66,20 +66,6 @@
             <version>3.3.1</version>
         </dependency>
 
-        <!--Mail Lib-->
-
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
-            <version>1.5.2</version>
-        </dependency>
-
         <!--Spring Mail-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

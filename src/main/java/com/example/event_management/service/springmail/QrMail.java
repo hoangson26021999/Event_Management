@@ -1,4 +1,4 @@
-package com.example.event_management.service.SpringMail;
+package com.example.event_management.service.springmail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;

@@ -1,4 +1,4 @@
-package com.example.event_management.service.SpringMail;
+package com.example.event_management.service.springmail;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,20 +1,14 @@
 package com.example.event_management.controller;
 
-import com.example.event_management.service.SpringMail.MyConstants;
-import com.example.event_management.service.SpringMail.QrMail;
+import com.example.event_management.DTO.EventDTO;
+import com.example.event_management.service.springmail.QrMail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.io.File;
+import java.util.ArrayList;
 
 @Controller
 public class BaseController {
@@ -26,6 +20,16 @@ public class BaseController {
 
     @GetMapping("/login")
     public String login() { return "login" ;}
+
+    @PostMapping("/createEvent")
+    @ResponseBody
+    public EventDTO createEvent(@RequestBody EventDTO newEvent) { return newEvent;}
+
+    @GetMapping("/getAllEvent")
+    public ArrayList<EventDTO> getAllEvent() {
+        ArrayList<EventDTO> a = new ArrayList<>() ;
+        return a ;
+    }
 
     @Autowired
     private QrMail qrmail ;
