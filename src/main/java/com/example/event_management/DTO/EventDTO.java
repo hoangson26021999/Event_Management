@@ -7,7 +7,7 @@ import java.sql.Time;
 
 @Data
 public class EventDTO {
-
+    private int event_id ;
     private String event_name ;
     private Date event_date ;
     private Time event_starting_time ;

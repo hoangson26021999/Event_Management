@@ -21,7 +21,20 @@ public class EventService implements IEventService {
     public EventDTO createEvent(EventDTO newEvent) {
         EventEntity newEventEntity = eventConverter.convertToEntity(newEvent) ;
         newEventEntity = eventRepository.save(newEventEntity) ;
+        return eventConverter.convertToDTO(newEventEntity) ;
+    }
 
+    @Override
+    public EventDTO editEvent(EventDTO newEvent) {
+        EventEntity newEventEntity = eventConverter.convertToEntity(newEvent) ;
+        newEventEntity = eventRepository.save(newEventEntity) ;
+        return eventConverter.convertToDTO(newEventEntity) ;
+    }
+
+    @Override
+    public EventDTO deleteEvent(EventDTO newEvent) {
+        EventEntity newEventEntity = eventConverter.convertToEntity(newEvent) ;
+        newEventEntity = eventRepository.save(newEventEntity) ;
         return eventConverter.convertToDTO(newEventEntity) ;
     }
 

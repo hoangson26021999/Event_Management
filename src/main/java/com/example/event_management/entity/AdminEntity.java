@@ -27,7 +27,7 @@ public class AdminEntity {
     private String admin_account_name ;
 
     @Column
-    private String admin_password_name ;
+    private String admin_account_password ;
 
     /*@OneToMany( mappedBy = "event_admin")
     private List<EventEntity> events = new ArrayList<>();*/

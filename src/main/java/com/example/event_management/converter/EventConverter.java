@@ -20,6 +20,7 @@ public class EventConverter {
 
     public EventDTO convertToDTO (EventEntity b) {
         EventDTO a = new EventDTO() ;
+        a.setEvent_id(b.getEvent_id());
         a.setEvent_name(b.getEvent_name());
         a.setEvent_date(b.getEvent_date());
         a.setEvent_location(b.getEvent_location());
