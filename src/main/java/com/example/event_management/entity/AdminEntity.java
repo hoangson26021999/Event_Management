@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name ="admin")
 public class AdminEntity {
 
-    @Setter(AccessLevel.NONE)
+    /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int admin_id ;

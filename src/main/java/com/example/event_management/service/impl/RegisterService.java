@@ -27,4 +27,18 @@ public class RegisterService implements IRegisterService {
         newregister = registerRepository.save(newregister) ;
         return registerConverter.convertToDTO(newregister);
     }
+
+    @Override
+    public RegisterDTO editRegister(RegisterDTO newRegister) {
+        RegisterEntity newregister = registerConverter.convertToEntity(newRegister);
+        newregister = registerRepository.save(newregister) ;
+        return registerConverter.convertToDTO(newregister);
+    }
+
+    @Override
+    public void deleteRegister(int[] ids) {
+        for(int id : ids) {
+            registerRepository.deleteById(id);
+        }
+    }
 }

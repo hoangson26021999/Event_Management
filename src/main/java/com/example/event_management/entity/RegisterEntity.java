@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name ="register")
 public class RegisterEntity {
 
-    @Setter(AccessLevel.NONE)
+    /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int register_id ;

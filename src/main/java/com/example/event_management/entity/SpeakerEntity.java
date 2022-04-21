@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "speaker")
 public class SpeakerEntity {
 
-    @Setter(AccessLevel.NONE)
+    /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int speaker_id ;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class SpeakerConverter {
     public SpeakerEntity toEntity (SpeakerDTO speakerDTO) {
                 SpeakerEntity a = new SpeakerEntity() ;
+                a.setSpeaker_id(speakerDTO.getId());
                 a.setSpeaker_name(speakerDTO.getSpeaker_name()) ;
                 a.setSpeaker_age(speakerDTO.getSpeaker_age())  ;
                 a.setSpeaker_email(speakerDTO.getSpeaker_email());

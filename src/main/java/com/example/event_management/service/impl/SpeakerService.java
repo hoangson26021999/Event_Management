@@ -24,7 +24,20 @@ public class SpeakerService implements ISpeakerService {
     public SpeakerDTO createSpeaker(SpeakerDTO newSpeaker) {
         SpeakerEntity speakerEntity = speakerConverter.toEntity(newSpeaker) ;
         speakerEntity = speakerRepository.save(speakerEntity) ;
-
         return speakerConverter.toDTO(speakerEntity) ;
+    }
+
+    @Override
+    public SpeakerDTO editSpeaker(SpeakerDTO editSpeaker) {
+        SpeakerEntity speakerEntity = speakerConverter.toEntity(editSpeaker) ;
+        speakerEntity = speakerRepository.save(speakerEntity) ;
+        return speakerConverter.toDTO(speakerEntity) ;
+    }
+
+    @Override
+    public void deleteSpeaker(int[] ids) {
+        for(int id : ids) {
+            speakerRepository.deleteById(id);
+        }
     }
 }

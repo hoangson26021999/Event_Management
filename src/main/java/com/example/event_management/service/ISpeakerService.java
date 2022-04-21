@@ -5,6 +5,7 @@ import com.example.event_management.DTO.RegisterDTO;
 import com.example.event_management.DTO.SpeakerDTO;
 
 public interface ISpeakerService {
-
     SpeakerDTO createSpeaker (SpeakerDTO newSpeaker) ;
+    SpeakerDTO editSpeaker (SpeakerDTO editSpeaker) ;
+    void deleteSpeaker (int[] ids) ;
 }

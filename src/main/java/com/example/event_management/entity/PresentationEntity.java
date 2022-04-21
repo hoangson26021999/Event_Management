@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name ="presentation")
 public class PresentationEntity {
 
-    @Setter(AccessLevel.NONE)
+    /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int presentation_id ;

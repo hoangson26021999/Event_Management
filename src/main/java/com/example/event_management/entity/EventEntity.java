@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name ="event")
 public class EventEntity {
 
-    @Setter(AccessLevel.NONE)
+    /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private int event_id ;
