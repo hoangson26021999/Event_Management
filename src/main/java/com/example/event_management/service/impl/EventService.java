@@ -8,6 +8,9 @@ import com.example.event_management.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class EventService implements IEventService {
 
@@ -16,6 +19,16 @@ public class EventService implements IEventService {
 
     @Autowired
     private EventRepository eventRepository ;
+
+    @Override
+    public List<EventDTO> getAllEvents() {
+        List<EventEntity> allEventsEntity = eventRepository.findAll() ;
+        List<EventDTO> allEventsDTO = new ArrayList<>() ;
+        for (EventEntity i : allEventsEntity) {
+               allEventsDTO.add(eventConverter.convertToDTO(i)) ;
+        }
+        return allEventsDTO ;
+    }
 
     @Override
     public EventDTO createEvent(EventDTO newEvent) {

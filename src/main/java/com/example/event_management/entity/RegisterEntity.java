@@ -29,10 +29,8 @@ public class RegisterEntity {
     @Column
     private String register_email ;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String register_account_name ;
-
-    @Column
     private String register_account_password ;
 
    /* @ManyToMany

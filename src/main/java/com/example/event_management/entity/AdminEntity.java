@@ -23,10 +23,8 @@ public class AdminEntity {
     @Column
     private String admin_name ;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String admin_account_name ;
-
-    @Column
     private String admin_account_password ;
 
     /*@OneToMany( mappedBy = "event_admin")

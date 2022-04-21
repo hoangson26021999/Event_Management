@@ -28,10 +28,8 @@ public class SpeakerEntity {
     @Column
     private String speaker_career ;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String speaker_account_name ;
-
-    @Column
     private String speaker_account_password ;
 
   /*  @OneToMany( mappedBy = "presentation_speaker")
