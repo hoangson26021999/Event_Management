@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Event Management - Admin Home </h1>
+
+<a th:href="@{/admin_home}">Home </a> </br>
+<a th:href="@{/admin_your_events}">Your Events </a> </br>
+<h1 th:inline="text">Xin chào bạn [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Đăng xuất"/>
+</form>
+</br>
+
+<form>
+    <table border="1" >
+        <tr>
+            <th>Event's Name</th>
+            <th>Detail</th>
+        </tr>
+        <tr th:each ="event : ${events}">
+            <td th:utext="${event.event_name}">...</td>
+            <td><a th:href="@{'/home/' + ${event.event_id}}" >Chi tiết</a></td>
+        </tr>
+    </table>
+</form>
+<a th:href="@{/create_event}">Tạo sự kiện</a>
+</body>
+</html>
+

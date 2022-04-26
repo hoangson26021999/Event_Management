@@ -7,9 +7,22 @@
 </head>
 <body>
 <h1>Event Management</h1>
-
-<p>Bấm vào <a th:href="@{/content}">link này</a> để đăng nhập.</p>
-
+    <a th:href="@{/home}">Home </a> </br>
+    <a th:href="@{/login}">Đăng nhập</a> </br>
+    <a th:href="@{/create_user}">Đăng ký</a>
+    <form>
+        <table border="1" >
+            <tr>
+                <th>Event's Name</th>
+                <th>Admin id</th>
+                <th>Detail</th>
+            </tr>
+            <tr th:each ="event : ${events}">
+                <td th:utext="${event.event_name}">...</td>
+                <td th:utext="${event.event_admin_id}">...</td>
+                <td><a th:href="@{'/home/' + ${event.event_id}}" >Chi tiết</a></td>
+            </tr>
+        </table>
+    </form>
 </body>
-
 </html>

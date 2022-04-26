@@ -1,5 +1,6 @@
 package com.example.event_management.security;
 
+import com.example.event_management.service.EvMaUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,45 +8,42 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private EvMaUserDetailService evMaUserDetailService ;
+
     @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        // Tạo ra user trong bộ nhớ
-        // lưu ý, chỉ sử dụng cách này để minh họa
-        // Còn thực tế chúng ta sẽ kiểm tra user trong csdl
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(
-                User.withDefaultPasswordEncoder() // Sử dụng mã hóa password đơn giản
-                        .username("loda")
-                        .password("loda")
-                        .roles("USER") // phân quyền là người dùng.
-                        .build()
-        );
-        return manager;
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder() ;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http    .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/home").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
+                    .antMatchers("/", "/home" ,"/login" , "/event_detail/**" ,"/create_event", "/create_user" , "/create_registerform" , "/create_speakerform" ).permitAll() // Cho phép tất cả mọi người truy cập vào các địa chỉ này
                     .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
                     .and()
-                .formLogin() // Cho phép người dùng xác thực bằng form login
-                    .defaultSuccessUrl("/content")
+                .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/j_spring_security_check")// Cho phép người dùng xác thực bằng form login
+                    .defaultSuccessUrl("/user_home")
                     .permitAll() // Tất cả đều được truy cập vào địa chỉ này
                     .and()
                 .logout()
                     .logoutSuccessUrl("/home")// Cho phép logout
                     .permitAll();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(evMaUserDetailService).passwordEncoder(passwordEncoder());
     }
 
 }

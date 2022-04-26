@@ -38,14 +38,14 @@ public class EventEntity {
     @Column
     private String event_location ;
 
-    /*@ManyToOne
-    private SpeakerEntity event_speaker;
-
     @ManyToMany(mappedBy = "Events")
     private List<RegisterEntity> registers = new ArrayList<>();
 
     @ManyToOne
-    private AdminEntity event_admin;*/
+    private SpeakerEntity event_speaker;
+
+    @ManyToOne
+    private AdminEntity event_admin;
 
 
 }

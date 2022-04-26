@@ -18,15 +18,17 @@ public class AdminEntity {
     /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int admin_id ;
+    private int adminId ;
 
     @Column
-    private String admin_name ;
+    private String adminName ;
 
     @Column(nullable = false, unique = true)
-    private String admin_account_name ;
-    private String admin_account_password ;
+    private String adminAccountName ;
 
-    /*@OneToMany( mappedBy = "event_admin")
-    private List<EventEntity> events = new ArrayList<>();*/
+    @Column(nullable = false)
+    private String adminAccountPassword ;
+
+    @OneToMany( mappedBy = "event_admin")
+    private List<EventEntity> events = new ArrayList<>();
 }

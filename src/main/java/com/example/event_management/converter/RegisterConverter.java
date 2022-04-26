@@ -15,8 +15,8 @@ public class RegisterConverter {
         a.setRegister_name(b.getRegister_name());
         a.setRegister_age(b.getRegister_age());
         a.setRegister_email(b.getRegister_email());
-        a.setRegister_account_name(b.getRegister_account_name());
-        a.setRegister_account_password(b.getRegister_account_password());
+        a.setRegisterAccountName(b.getRegister_account_name());
+        a.setRegisterAccountPassword(b.getRegister_account_password());
         return a  ;
     }
 
@@ -26,8 +26,8 @@ public class RegisterConverter {
         a.setRegister_name(b.getRegister_name());
         a.setRegister_age(b.getRegister_age());
         a.setRegister_email(b.getRegister_email());
-        a.setRegister_account_name(b.getRegister_account_name());
-        a.setRegister_account_password(b.getRegister_account_password());
+        a.setRegister_account_name(b.getRegisterAccountName());
+        a.setRegister_account_password(b.getRegisterAccountPassword());
         return a;
     }
 }

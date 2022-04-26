@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Event's Creating Form</h1>
+<form th:action="@{/event}" th:object="${newevent}" method="POST">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="${newevent.event_name}" /></td>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td><input type="date" th:field="${newevent.event_date}" /> </td>
+        </tr>
+        <tr>
+            <td>Starting time</td>
+            <td><input type="text" th:field="${newevent.event_starting_time}" /> </td>
+        </tr>
+        <tr>
+            <td>Ending time</td>
+            <td><input type="text" th:field="${newevent.event_ending_time}" /> </td>
+        </tr>-
+        <tr>
+            <td>Location</td>
+            <td><input type="text" th:field="${newevent.event_location}" /> </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Submit" />
+                <a th:href="@{/admin_home}">Cancel</a>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

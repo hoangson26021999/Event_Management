@@ -13,8 +13,8 @@ public class SpeakerConverter {
                 a.setSpeaker_age(speakerDTO.getSpeaker_age())  ;
                 a.setSpeaker_email(speakerDTO.getSpeaker_email());
                 a.setSpeaker_career(speakerDTO.getSpeaker_career());
-                a.setSpeaker_account_name(speakerDTO.getSpeaker_account_name());
-                a.setSpeaker_account_password(speakerDTO.getSpeaker_account_password());
+                a.setSpeakerAccountName(speakerDTO.getSpeaker_account_name());
+                a.setSpeakerAccountPassword(speakerDTO.getSpeaker_account_password());
                 return a ;
     }
 
@@ -25,8 +25,8 @@ public class SpeakerConverter {
         a.setSpeaker_age(speakerEntity.getSpeaker_age()) ;
         a.setSpeaker_email(speakerEntity.getSpeaker_email());
         a.setSpeaker_career(speakerEntity.getSpeaker_career());
-        a.setSpeaker_account_name(speakerEntity.getSpeaker_account_name());
-        a.setSpeaker_account_password(speakerEntity.getSpeaker_account_password());
+        a.setSpeaker_account_name(speakerEntity.getSpeakerAccountName());
+        a.setSpeaker_account_password(speakerEntity.getSpeakerAccountPassword());
         return a ;
 
     }

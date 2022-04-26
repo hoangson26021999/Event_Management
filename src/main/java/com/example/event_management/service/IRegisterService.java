@@ -10,4 +10,6 @@ public interface IRegisterService {
     RegisterDTO editRegister(RegisterDTO newRegister);
 
     void deleteRegister(int[] ids);
+
+    void registerEvent(int register_id , int event_id);
 }

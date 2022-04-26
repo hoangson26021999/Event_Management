@@ -9,6 +9,8 @@ import com.example.event_management.repository.EventRepository;
 import com.example.event_management.repository.RegisterRepository;
 import com.example.event_management.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,5 +42,12 @@ public class RegisterService implements IRegisterService {
         for(int id : ids) {
             registerRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public void registerEvent(int register_id, int event_id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+
     }
 }

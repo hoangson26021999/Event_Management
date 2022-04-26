@@ -30,14 +30,15 @@ public class RegisterEntity {
     private String register_email ;
 
     @Column(nullable = false, unique = true)
-    private String register_account_name ;
-    private String register_account_password ;
+    private String registerAccountName ;
+    @Column(nullable = false)
+    private String registerAccountPassword ;
 
-   /* @ManyToMany
+    @ManyToMany
     @JoinTable(name = "register_event",
             joinColumns = @JoinColumn(name = "register_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private List<EventEntity> Events = new ArrayList<>();*/
+    private List<EventEntity> Events = new ArrayList<>();
 
 }

@@ -23,7 +23,7 @@ public class PresentationEntity {
     @Column
     private String presentation_content ;
 
-    /*@ManyToOne
-    private SpeakerEntity presentation_speaker;*/
+    @ManyToOne
+    private SpeakerEntity presentation_speaker;
 
 }

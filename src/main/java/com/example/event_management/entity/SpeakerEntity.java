@@ -29,14 +29,16 @@ public class SpeakerEntity {
     private String speaker_career ;
 
     @Column(nullable = false, unique = true)
-    private String speaker_account_name ;
-    private String speaker_account_password ;
+    private String speakerAccountName ;
 
-  /*  @OneToMany( mappedBy = "presentation_speaker")
+    @Column(nullable = false)
+    private String speakerAccountPassword ;
+
+    @OneToMany( mappedBy = "presentation_speaker")
     private List<PresentationEntity> presentations = new ArrayList<>();
 
     @OneToMany( mappedBy = "event_speaker")
-    private List<EventEntity> events = new ArrayList<>();*/
+    private List<EventEntity> events = new ArrayList<>();
 
 
 }

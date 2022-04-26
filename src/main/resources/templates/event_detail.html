@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span th:text="'Name: ' + ${event.event_name}"></span>
+    </br>
+    <span th:text="'Date: ' + ${event.event_date}"></span>
+    </br>
+    <span th:text="'Location: ' + ${event.event_location}"></span>
+    </br>
+    <span th:text="'Starting_time: ' + ${event.event_starting_time}"></span>
+    </br>
+    <span th:text="'Ending_time: ' + ${event.event_ending_time}"></span>
+    </br>
+
+    <a th:href="@{/home}">Back</a> </br>
+    <a th:href="@{'/register_event/' +${event.event_id} }">Đăng kí tham gia sự kiện</a>
+
+</body>
+</html>
