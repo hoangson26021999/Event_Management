@@ -40,9 +40,9 @@ public class EvMaUserDetailService implements UserDetailsService {
             SpeakerEntity c = speakerRepository.findSpeakerEntityBySpeakerAccountName(username) ;
 
             List<GrantedAuthority> grantList = new ArrayList<>();
-            GrantedAuthority admin_authority = new SimpleGrantedAuthority("ADMIN");
-            GrantedAuthority register_authority = new SimpleGrantedAuthority("REGISTER");
-            GrantedAuthority speaker_authority = new SimpleGrantedAuthority("SPEAKER");
+            GrantedAuthority admin_authority = new SimpleGrantedAuthority("ROLE_ADMIN");
+            GrantedAuthority register_authority = new SimpleGrantedAuthority("ROLE_REGISTER");
+            GrantedAuthority speaker_authority = new SimpleGrantedAuthority("ROLE_SPEAKER");
 
             if (a != null) {
                 grantList.add(admin_authority) ;

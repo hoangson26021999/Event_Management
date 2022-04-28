@@ -21,22 +21,22 @@ public class EventEntity {
     /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private int event_id ;
+    private int eventId ;
 
     @Column
-    private String event_name ;
+    private String eventName ;
 
     @Column
-    private Date event_date ;
+    private Date eventDate ;
 
     @Column
-    private Time event_starting_time ;
+    private Time eventStartingTime ;
 
     @Column
-    private Time event_ending_time ;
+    private Time eventEndingTime ;
 
     @Column
-    private String event_location ;
+    private String eventLocation ;
 
     @ManyToMany(mappedBy = "Events")
     private List<RegisterEntity> registers = new ArrayList<>();

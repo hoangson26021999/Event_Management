@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http    .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/home" ,"/login" , "/event_detail/**" ,"/create_event", "/create_user" , "/create_registerform" , "/create_speakerform" ).permitAll() // Cho phép tất cả mọi người truy cập vào các địa chỉ này
+                    .antMatchers("/", "/home", "/home/**" ,"/login" , "/event_detail/**" ,"/create_event", "/create_user" , "/create_registerform" , "/create_speakerform" ).permitAll() // Cho phép tất cả mọi người truy cập vào các địa chỉ này
                     .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
                     .and()
                 .formLogin()

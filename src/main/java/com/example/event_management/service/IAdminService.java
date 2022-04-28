@@ -7,6 +7,4 @@ import java.util.List;
 public interface IAdminService {
     List<EventDTO> getEventsbyAdminId() ;
 
-
-
 }

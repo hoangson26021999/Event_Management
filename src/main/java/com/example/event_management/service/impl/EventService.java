@@ -71,5 +71,9 @@ public class EventService implements IEventService {
        }
     }
 
+    @Override
+    public void deleteOneEvent(int id) {
+        eventRepository.deleteById(id);
+    }
 
 }

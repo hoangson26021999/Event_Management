@@ -3,7 +3,11 @@ package com.example.event_management.service;
 import com.example.event_management.DTO.EventDTO;
 import com.example.event_management.DTO.RegisterDTO;
 
+import java.util.List;
+
 public interface IRegisterService {
+
+    List<EventDTO> getEventsByRegisterID() ;
 
     RegisterDTO createRegister(RegisterDTO newRegister);
 
@@ -11,5 +15,5 @@ public interface IRegisterService {
 
     void deleteRegister(int[] ids);
 
-    void registerEvent(int register_id , int event_id);
+    void registerEvent( int event_id);
 }

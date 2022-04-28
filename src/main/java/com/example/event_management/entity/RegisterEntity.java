@@ -18,16 +18,16 @@ public class RegisterEntity {
     /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int register_id ;
+    private int registerId ;
 
     @Column
-    private String register_name ;
+    private String registerName ;
 
     @Column
-    private int register_age ;
+    private int registerAge ;
 
     @Column
-    private String register_email ;
+    private String registerEmail ;
 
     @Column(nullable = false, unique = true)
     private String registerAccountName ;

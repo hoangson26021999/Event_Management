@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{'/event/' +${editevent.event_id}}" th:object="${editevent}" method="post">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="${editevent.event_name}" /></td>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td><input  type="date" th:field="${editevent.event_date}" /> </td>
+        </tr>
+        <tr>
+            <td>Admin</td>
+            <td><input type="text"  readonly="true" th:field="${editevent.event_admin_id}" /> </td>
+        </tr>
+        <tr>
+            <td>Speaker</td>
+            <td><input type="text" th:field="${editevent.event_speaker_id}" /> </td>
+        </tr>
+        <tr>
+            <td>Starting time</td>
+            <td><input type="text" th:field="${editevent.event_starting_time}" /> </td>
+        </tr>
+        <tr>
+            <td>Ending time</td>
+            <td><input type="text" th:field="${editevent.event_ending_time}" /> </td>
+        </tr>-
+        <tr>
+            <td>Location</td>
+            <td><input type="text" th:field="${editevent.event_location}" /> </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Submit" />
+            </td>
+        </tr>
+    </table>
+</form>
+<a th:href="@{/admin_home}">Back</a> </br>
+
+
+</body>
+</html>

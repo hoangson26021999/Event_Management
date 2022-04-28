@@ -10,4 +10,5 @@ public interface IEventService {
     EventDTO createEvent(EventDTO newEvent) ;
     EventDTO editEvent(EventDTO editEvent ) ;
     void deleteEvent(int[] ids) ;
+    void deleteOneEvent(int id) ;
 }

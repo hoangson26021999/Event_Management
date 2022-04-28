@@ -6,10 +6,9 @@
     <title>Home</title>
 </head>
 <body>
-<h1>Event Management - Register Home </h1>
+<h1>Event Management - Speaker Your Event </h1>
 
-<a th:href="@{/register_home}">Home </a> </br>
-<a th:href="@{/register/your_event}">Your Events </a> </br>
+<a th:href="@{/speaker_home}">Home </a> </br>
 <h1 th:inline="text">Xin chào bạn [[${#httpServletRequest.remoteUser}]]!</h1>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Đăng xuất"/>
@@ -22,16 +21,14 @@
             <th>Event's Name</th>
             <th>Admin</th>
             <th>Speaker</th>
-            <th>Đăng kí </th>
         </tr>
         <tr th:each ="event : ${events}">
             <td th:utext="${event.event_name}">...</td>
             <td th:utext="${event.event_admin_id}">...</td>
             <td th:utext="${event.event_speaker_id}">...</td>
-            <td><a th:href="@{'/register/' + ${event.event_id}}" >Đăng kí</a></td>
         </tr>
     </table>
 </form>
-
 </body>
 </html>
+

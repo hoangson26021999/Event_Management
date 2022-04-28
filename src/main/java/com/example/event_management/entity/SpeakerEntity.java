@@ -14,19 +14,19 @@ public class SpeakerEntity {
     /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int speaker_id ;
+    private int speakerId ;
 
     @Column
-    private String speaker_name ;
+    private String speakerName ;
 
     @Column
-    private int speaker_age ;
+    private int speakerAge ;
 
     @Column
-    private String speaker_email ;
+    private String speakerEmail ;
 
     @Column
-    private String speaker_career ;
+    private String speakerCareer ;
 
     @Column(nullable = false, unique = true)
     private String speakerAccountName ;

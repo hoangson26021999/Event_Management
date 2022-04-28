@@ -9,14 +9,14 @@
 <h1>Event Management - Speaker Home </h1>
 
 <a th:href="@{/speaker_home}">Home </a> </br>
-<a th:href="@{/speaker_your_events}">Your Events </a> </br>
+<a th:href="@{/speaker/your_event}">Your Events </a> </br>
 <h1 th:inline="text">Xin chào bạn [[${#httpServletRequest.remoteUser}]]!</h1>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Đăng xuất"/>
 </form>
 </br>
 
-<!--<form>
+<form>
     <table border="1" >
         <tr>
             <th>Event's Name</th>
@@ -24,10 +24,10 @@
         </tr>
         <tr th:each ="event : ${events}">
             <td th:utext="${event.event_name}">...</td>
-            <td><a th:href="@{'/home/' + ${event.event_id}}" >Chi tiết</a></td>
+            <td><a th:href="@{'/speaker/' + ${event.event_id}}" >Chi tiết</a></td>
         </tr>
     </table>
-</form>-->
+</form>
 
 </body>
 </html>

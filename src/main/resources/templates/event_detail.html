@@ -5,19 +5,31 @@
     <title>Title</title>
 </head>
 <body>
-    <span th:text="'Name: ' + ${event.event_name}"></span>
-    </br>
-    <span th:text="'Date: ' + ${event.event_date}"></span>
-    </br>
-    <span th:text="'Location: ' + ${event.event_location}"></span>
-    </br>
-    <span th:text="'Starting_time: ' + ${event.event_starting_time}"></span>
-    </br>
-    <span th:text="'Ending_time: ' + ${event.event_ending_time}"></span>
-    </br>
+            <h1> Event Detail </h1>
+        <span th:text="'Name: ' + ${event.event_name}"></span>
+        </br>
+        <span th:text="'Date: ' + ${event.event_date}"></span>
+        </br>
+        <span th:text="'Location: ' + ${event.event_location}"></span>
+        </br>
+        <span th:text="'Starting_time: ' + ${event.event_starting_time}"></span>
+        </br>
+        <span th:text="'Ending_time: ' + ${event.event_ending_time}"></span>
+
+            </br>
+            <h1> Speaker Detail </h1>
+
+        <span th:text="'Name: ' + ${speaker.speaker_name}"></span>
+        </br>
+        <span th:text="'Age: ' + ${speaker.speaker_age}"></span>
+        </br>
+        <span th:text="'Career: ' + ${speaker.speaker_career}"></span>
+        </br>
+        <span th:text="'Email: ' + ${speaker.speaker_email}"></span>
+        </br>
 
     <a th:href="@{/home}">Back</a> </br>
-    <a th:href="@{'/register_event/' +${event.event_id} }">Đăng kí tham gia sự kiện</a>
+    <a th:href="@{'/register_event/' +${event.event_id}}">Đăng kí tham gia sự kiện</a> </br>
 
 </body>
 </html>

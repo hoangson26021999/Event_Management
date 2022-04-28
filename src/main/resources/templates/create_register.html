@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+        <style>
+            th, td {
+                padding: 5px;
+            }
+            td span  {
+                font-size:90%;
+                font-style: italic;
+                color: red;
+            }
+            .error {
+                color: red;
+                font-style: italic;
+            }
+        </style>
 </head>
 <body>
 <form th:action="@{/register}" th:object="${newregister}" method="POST">
@@ -10,22 +24,42 @@
         <tr>
             <td>Name</td>
             <td><input type="text" th:field="${newregister.register_name}" /></td>
+            <td>
+                <span th:if="${#fields.hasErrors('userName')}" th:errors="${newregister.register_name}">..</span>
+            </td>
         </tr>
         <tr>
             <td>Age</td>
             <td><input type="number" th:field="${newregister.register_age}" /> </td>
+
         </tr>
         <tr>
             <td>Email</td>
             <td><input type="email" th:field="${newregister.register_email}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="${newregister.register_email}">..</span>
+            </td>
         </tr>
         <tr>
             <td>Account Name </td>
             <td><input type="text" th:field="${newregister.register_account_name}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('userName')}" th:errors="${newregister.register_account_name}">..</span>
+            </td>
         </tr>-
         <tr>
             <td>Password</td>
             <td><input type="text" th:field="${newregister.register_account_password}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="${newregister.register_account_password}">..</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Confirm</td>
+            <td><input type="password" th:field="*{newregister.confirm_password}" /> </td>
+            <td>
+                <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="${newregister.confirm_password}">..</span>
+            </td>
         </tr>
         <tr>
             <td>
