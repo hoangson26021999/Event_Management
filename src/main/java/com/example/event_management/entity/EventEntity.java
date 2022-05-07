@@ -21,7 +21,7 @@ public class EventEntity {
     /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
-    private int eventId ;
+    private long eventId ;
 
     @Column
     private String eventName ;
@@ -38,7 +38,11 @@ public class EventEntity {
     @Column
     private String eventLocation ;
 
-    @ManyToMany(mappedBy = "Events")
+    @ManyToMany()
+    @JoinTable(name = "event_register",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "register_id")
+    )
     private List<RegisterEntity> registers = new ArrayList<>();
 
     @ManyToOne

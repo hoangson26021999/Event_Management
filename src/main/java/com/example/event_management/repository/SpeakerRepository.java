@@ -4,7 +4,7 @@ import com.example.event_management.entity.AdminEntity;
 import com.example.event_management.entity.SpeakerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SpeakerRepository extends JpaRepository< SpeakerEntity, Integer> {
+public interface SpeakerRepository extends JpaRepository< SpeakerEntity, Long> {
 
     SpeakerEntity findSpeakerEntityBySpeakerAccountName(String name) ;
 }

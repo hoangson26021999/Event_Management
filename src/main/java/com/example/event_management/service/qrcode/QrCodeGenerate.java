@@ -19,10 +19,9 @@ public class QrCodeGenerate {
 
     @Getter
     @Setter
-    private String input = "Hello";
+    private String input ;
 
-    @Value("${path}")
-    private String outputFile= "src/main/resources/QrCode/QrTest4.jpg" ;
+    private String outputFile= "src/main/resources/QrCode/QrTest.jpg" ;
 
     public void generateQrCode () throws IOException {
 

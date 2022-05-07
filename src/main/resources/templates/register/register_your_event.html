@@ -8,30 +8,30 @@
 <body>
 <h1>Event Management - Register Home </h1>
 
-<a th:href="@{/register_home}">Home </a> </br>
-<h1 th:inline="text">Xin chào bạn [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Đăng xuất"/>
-</form>
+    <a th:href="@{/register/home}">Home </a> </br>
+    <h1 th:inline="text">Xin chào bạn [[${#httpServletRequest.remoteUser}]]!</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Đăng xuất"/>
+    </form>
 </br>
 
-<form>
-    <table border="1" >
-        <tr>
-            <th>Event's Name</th>
-            <th>Delete</th>
-        </tr>
-        <tr th:each ="event : ${events}">
-            <td th:utext="${event.event_name}">...</td>
-            <td>
-                <form th:action="@{'/event/' + ${event.event_id}}" method="post">
-                    <input type="hidden" name="_method" value="delete">
-                    <input type="submit" value="Delete" />
-                </form>
-            </td>
-        </tr>
-    </table>
-</form>
+    <form>
+        <table border="1" >
+            <tr>
+                <th>Event's Name</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each ="event : ${events}">
+                <td th:utext="${event.event_name}">...</td>
+                <td>
+                    <form th:action="@{'/register/event/' + ${event.event_id}}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="submit" value="Delete" />
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
 

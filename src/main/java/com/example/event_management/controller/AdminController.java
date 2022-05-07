@@ -5,12 +5,12 @@ import com.example.event_management.service.IAdminService;
 import com.example.event_management.service.IEventService;
 import com.example.event_management.service.ISpeakerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@Secured("ROLE_ADMIN")
+@EnableWebMvc
 @Controller
 public class AdminController {
 
@@ -25,7 +25,7 @@ public class AdminController {
 
     // Trả về trang admin home
 
-    @GetMapping (value = { "/admin_home"} )
+    @GetMapping (value = { "/admin/home"} )
     public String index(Model model) {
         model.addAttribute("events", eventService.getAllEvents());
         return "/admin/admin_home" ;
@@ -33,7 +33,7 @@ public class AdminController {
 
     // Trả về trang admin your event
 
-    @GetMapping(value = { "/admin_your_events"} )
+    @GetMapping(value = { "/admin/your_events"} )
     public String yourEvents(Model model) {
         model.addAttribute("events", adminService.getEventsbyAdminId());
         return "/admin/admin_your_event";
@@ -50,7 +50,7 @@ public class AdminController {
 
     // Trả về trang admin edit detail
 
-    @GetMapping(value = {"/event/{event_id}"})
+    @GetMapping(value = {"/admin/event/{event_id}"})
     public String getEditForm(Model model ,@PathVariable("event_id") int id) {
         model.addAttribute("editevent", eventService.getEventbyId(id)) ;
         return "/admin/admin_edit_event";
@@ -58,9 +58,10 @@ public class AdminController {
 
     // Trả về trang create event
 
-    @GetMapping("/create_event")
+    @GetMapping("/admin/create_event")
     public String createEventForm (Model model) {
         model.addAttribute("newevent", new EventDTO());
+        model.addAttribute("speakers", speakerService.getAllSpeakers());
         return "/admin/create_event" ;
     }
 
@@ -68,33 +69,33 @@ public class AdminController {
 
     // API tạo mới event
 
-    @PostMapping("/event")
+    @PostMapping("/admin/event")
     public String createEvent( @ModelAttribute("newevent") EventDTO newevent) {
         eventService.createEvent(newevent);
-        return "redirect:/admin_home" ;
+        return "redirect:/admin/home" ;
     }
 
     // API chỉnh sửa thông tin event
 
-    @PostMapping(value = {"/event/{id}" })
+    @PostMapping(value = {"/admin/event/{id}" })
     public String editEvent( @ModelAttribute("editevent") EventDTO editevent, @PathVariable("id") int id) {
         editevent.setEvent_id(id);
         eventService.editEvent(editevent);
-        return "redirect:/admin_your_events";
+        return "redirect:/admin/your_events";
     }
 
     // API xóa event
 
-    @DeleteMapping("/event")
-    public void deleteEvents(@RequestBody int[] ids ) {
+    @DeleteMapping("/admin/event")
+    public void deleteEvents(@RequestBody long[] ids ) {
         eventService.deleteEvent(ids);
     }
 
-    @DeleteMapping(value = {"/event/{id}"})
+    @PostMapping(value = {"/admin/delete_event/{id}"})
     public String deleteOneEvent(@PathVariable("id") int id, Model model ) {
         eventService.deleteOneEvent(id);
         model.addAttribute("events", adminService.getEventsbyAdminId());
-        return "redirect:/admin_your_events";
+        return "redirect:/admin/your_events";
     }
 
 }

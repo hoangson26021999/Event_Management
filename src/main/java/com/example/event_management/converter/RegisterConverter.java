@@ -11,6 +11,9 @@ public class RegisterConverter {
 
     public RegisterEntity convertToEntity(RegisterDTO b) {
         RegisterEntity a = new RegisterEntity() ;
+        if(b.getRegister_id() !=0 ) {
+            a.setRegisterId(b.getRegister_id());
+        }
         a.setRegisterId(b.getRegister_id());
         a.setRegisterName(b.getRegister_name());
         a.setRegisterAge(b.getRegister_age());

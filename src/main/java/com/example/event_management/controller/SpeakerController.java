@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-@Secured("ROLE_SPEAKER")
 @Controller
 public class SpeakerController {
 
@@ -21,7 +20,7 @@ public class SpeakerController {
     @Autowired
     private IEventService eventService ;
 
-    @GetMapping("/speaker_home")
+    @GetMapping("/speaker/home")
     public String speakerHome (Model model) {
         model.addAttribute("events", eventService.getAllEvents());
         return "/speaker/speaker_home" ;
@@ -33,17 +32,19 @@ public class SpeakerController {
         return "/speaker/speaker_event_detail" ;
     }
 
-    @GetMapping("/speaker/your_event")
+    @GetMapping("/speaker/your_events")
     public String speakerYourEvent (Model model ) {
         model.addAttribute("events", speakerService.getEventsbySpeakerId());
         return "/speaker/speaker_your_event" ;
     }
 
-    @PostMapping("/speaker")
-    @ResponseBody
-    public String createSpeaker(@ModelAttribute SpeakerDTO newSpeaker) {
+// <---------------API--------------------------->
+
+    // Tạo mới speaker
+    @PostMapping("/create_speaker")
+    public String createSpeaker(@ModelAttribute("newspeaker") SpeakerDTO newSpeaker) {
         speakerService.createSpeaker(newSpeaker);
-        return "home";
+        return "redirect:/home";
     }
 
     @PutMapping("/speaker/{id}")
@@ -55,8 +56,9 @@ public class SpeakerController {
 
     @DeleteMapping("/speaker")
     @ResponseBody
-    public void deleteSpeaker(@RequestBody int[] ids) {
+    public void deleteSpeaker(@RequestBody long[] ids) {
         speakerService.deleteSpeaker(ids);
     }
+
 
 }

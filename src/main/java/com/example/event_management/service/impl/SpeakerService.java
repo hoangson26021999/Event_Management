@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +34,22 @@ public class SpeakerService implements ISpeakerService {
     @Autowired
     EventConverter eventConverter;
 
+    @Autowired
+    EntityManager entityManager ;
+
     @Override
-    public SpeakerDTO getSpeakerbyId(int id) {
+    public List<SpeakerDTO> getAllSpeakers() {
+
+        List<SpeakerDTO> list = new ArrayList<>() ;
+        for (SpeakerEntity s : speakerRepository.findAll())
+        {
+            list.add(speakerConverter.toDTO(s));
+        }
+        return list ;
+    }
+
+    @Override
+    public SpeakerDTO getSpeakerbyId(long id) {
         return speakerConverter.toDTO(speakerRepository.getById(id)) ;
     }
 
@@ -50,8 +65,15 @@ public class SpeakerService implements ISpeakerService {
 
     @Override
     public SpeakerDTO createSpeaker(SpeakerDTO newSpeaker) {
+
         SpeakerEntity speakerEntity = speakerConverter.toEntity(newSpeaker) ;
         speakerEntity = speakerRepository.save(speakerEntity) ;
+
+        /*entityManager.getTransaction().begin();
+        long index = service.saveUser(user);
+        entityManager.getTransaction().commit();*/
+
+
         return speakerConverter.toDTO(speakerEntity) ;
     }
 
@@ -63,8 +85,8 @@ public class SpeakerService implements ISpeakerService {
     }
 
     @Override
-    public void deleteSpeaker(int[] ids) {
-        for(int id : ids) {
+    public void deleteSpeaker(long[] ids) {
+        for(long id : ids) {
             speakerRepository.deleteById(id);
         }
     }

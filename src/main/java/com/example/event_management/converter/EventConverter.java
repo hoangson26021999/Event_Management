@@ -24,7 +24,7 @@ public class EventConverter {
 
         EventEntity a = new EventEntity() ;
         AdminEntity c = adminRepository.getById(b.getEvent_admin_id()) ;
-        SpeakerEntity d = speakerRepository.getById(b.getEvent_speaker_id()) ;
+        SpeakerEntity d = speakerRepository.getById( b.getEvent_speaker_id()) ;
 
         a.setEvent_admin(c);
         a.setEvent_speaker(d);

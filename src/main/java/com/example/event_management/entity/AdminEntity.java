@@ -18,7 +18,7 @@ public class AdminEntity {
     /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int adminId ;
+    private long adminId ;
 
     @Column
     private String adminName ;

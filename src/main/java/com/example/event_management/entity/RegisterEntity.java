@@ -9,8 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name ="register")
 public class RegisterEntity {
@@ -18,7 +17,7 @@ public class RegisterEntity {
     /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int registerId ;
+    private long registerId ;
 
     @Column
     private String registerName ;
@@ -34,11 +33,7 @@ public class RegisterEntity {
     @Column(nullable = false)
     private String registerAccountPassword ;
 
-    @ManyToMany
-    @JoinTable(name = "register_event",
-            joinColumns = @JoinColumn(name = "register_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id")
-    )
+    @ManyToMany( mappedBy = "registers" )
     private List<EventEntity> Events = new ArrayList<>();
 
 }

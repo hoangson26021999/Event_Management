@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{'/event/' +${editevent.event_id}}" th:object="${editevent}" method="post">
+<form th:action="@{'/admin/event/' +${editevent.event_id}}" th:object="${editevent}" method="post">
     <table>
         <tr>
             <td>Name</td>
@@ -42,7 +42,7 @@
         </tr>
     </table>
 </form>
-<a th:href="@{/admin_home}">Back</a> </br>
+<a th:href="@{/admin/home}">Back</a> </br>
 
 
 </body>

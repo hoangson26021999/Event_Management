@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 
-@Secured("ROLE_REGISTER")
 @Controller
 public class RegisterController {
 
@@ -26,7 +27,7 @@ public class RegisterController {
     @Autowired
     private IEventService eventService ;
 
-    @GetMapping("/register_home")
+    @GetMapping("/register/home")
     public String registerHome (Model model) {
         model.addAttribute("events" , eventService.getAllEvents()) ;
         return "/register/register_home" ;
@@ -39,7 +40,7 @@ public class RegisterController {
         return "/register/register_event_detail" ;
     }
 
-    @GetMapping("/register/your_event")
+    @GetMapping("/register/your_events")
     public String registerEventDetail (Model model) {
         model.addAttribute("events" ,registerService.getEventsByRegisterID()) ;
         return "/register/register_your_event" ;
@@ -48,13 +49,20 @@ public class RegisterController {
     @GetMapping("/register_event/{event_id}")
     public String registerEvent ( @PathVariable("event_id") int event_id ) {
         registerService.registerEvent(event_id);
-        return "redirect:/register_home" ;
+        return "redirect:/register/home" ;
     }
 
-    @PostMapping("/register")
-    @ResponseBody
-    public RegisterDTO createRegister( @ModelAttribute("newregister") RegisterDTO newregister) {
-        return registerService.createRegister(newregister);
+// <------------------API------------------->
+
+    @PostMapping("/create_register")
+    public String createRegister( Model model,  @ModelAttribute("newregister") @Validated RegisterDTO newregister, BindingResult result) {
+        // Validate result
+        if (result.hasErrors()) {
+            model.addAttribute("newregister", new RegisterDTO());
+            return "redirect:/create_register";
+        }
+        registerService.createRegister(newregister);
+        return "redirect:/home";
     }
 
     @PutMapping("/register/{id}")
@@ -66,17 +74,8 @@ public class RegisterController {
 
     @DeleteMapping("/register")
     @ResponseBody
-    public void deleteRegister(@RequestBody int[] ids) {
+    public void deleteRegister(@RequestBody long[] ids) {
         registerService.deleteRegister(ids);
     }
 
-    @Autowired
-    private QrMail qrmail ;
-
-    @ResponseBody
-    @RequestMapping("/sendQrCodeMail")
-    public String sendHtmlEmail() throws MessagingException {
-        qrmail.sendQrMail();
-        return "home";
-    }
 }

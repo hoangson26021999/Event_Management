@@ -1,45 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <title>Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<form th:action="@{/speaker}" th:object="${newspeaker}" method="POST">
-  <table>
-    <tr>
-      <td>Name</td>
-      <td><input type="text" th:field="${newspeaker.speaker_name}" /></td>
-    </tr>
-    <tr>
-      <td>Age</td>
-      <td><input type="number" th:field="${newspeaker.speaker_age}" /> </td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td><input type="email" th:field="${newspeaker.speaker_email}" /> </td>
-    </tr>
+  <form th:action="@{/create_speaker}" th:object="${newspeaker}" method="POST" >
+    <div class="mb-3 mt-3">
+      <label for="name" class="form-label">Speaker's name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter your name" th:field="${newspeaker.speaker_name}">
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="age" class="form-label">Speaker's age:</label>
+      <input type="number" class="form-control" id="age" placeholder="Age " th:field="${newspeaker.speaker_age}">
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="email" class="form-label">Speaker's email:</label>
+      <input type="text" class="form-control" id="email" placeholder="Email" th:field="${newspeaker.speaker_email}">
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="career" class="form-label">Speaker's career :</label>
+      <input type="text" class="form-control" id="career" placeholder="Career" th:field="${newspeaker.speaker_career}">
+    </div>
+    <div class="mb-3">
+      <label for="account" class="form-label">Account name :</label>
+      <input type="text" class="form-control" id="account" placeholder="Account" th:field="${newspeaker.speaker_account_name}" >
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Password :</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Password"  th:field="${newspeaker.speaker_account_password}" >
+    </div>
+   <!-- <div class="mb-3">
+      <label for="cfpwd" class="form-label">Confirm Password :</label>
+      <input type="password" class="form-control" id="cfpwd" placeholder="Confirm Password"  th:field="${newspeaker.speaker_account_password}" >
+    </div>-->
 
-    <tr>
-      <td>Career</td>
-      <td><input type="text" th:field="${newspeaker.speaker_career}" /></td>
-    </tr>
-    <tr>
-      <td>Account Name </td>
-      <td><input type="text" th:field="${newspeaker.speaker_account_name}" /> </td>
-    </tr>-
-    <tr>
-      <td>Password</td>
-      <td><input type="text" th:field="${newspeaker.speaker_account_password}" /> </td>
-    </tr>
-    <tr>
-      <td>
-        <input type="submit" value="Submit" />
-        <a th:href="@{/}">Cancel</a>
-      </td>
-    </tr>
-  </table>
-</form>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a th:href="@{/}">Cancel</a>
+  </form>
+    <!--<form th:action="@{/speaker}" th:object="${newspeaker}" method="POST">
+      <table>
+        <tr>
+          <td>Name</td>
+          <td><input type="text" th:field="${newspeaker.speaker_name}" /></td>
+        </tr>
+        <tr>
+          <td>Age</td>
+          <td><input type="number" th:field="${newspeaker.speaker_age}" /> </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><input type="email" th:field="${newspeaker.speaker_email}" /> </td>
+        </tr>
 
-</body>
+        <tr>
+          <td>Career</td>
+          <td><input type="text" th:field="${newspeaker.speaker_career}" /></td>
+        </tr>
+        <tr>
+          <td>Account Name </td>
+          <td><input type="text" th:field="${newspeaker.speaker_account_name}" /> </td>
+        </tr>-
+        <tr>
+          <td>Password</td>
+          <td><input type="text" th:field="${newspeaker.speaker_account_password}" /> </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" value="Submit" />
+            <a th:href="@{/}">Cancel</a>
+          </td>
+        </tr>
+      </table>
+    </form>-->
+
+  </body>
 </html>

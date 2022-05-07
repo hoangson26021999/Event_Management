@@ -32,35 +32,35 @@ public class BaseController {
     }
 
     @GetMapping(value = {"/home/{event_id}"})
-    public String index(Model model ,@PathVariable("event_id") int id) {
+    public String index(Model model ,@PathVariable("event_id") long id) {
         model.addAttribute("event", eventService.getEventbyId(id)) ;
         model.addAttribute("speaker", speakerService.getSpeakerbyId(eventService.getEventbyId(id).getEvent_speaker_id())) ;
         return "event_detail";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/home/login")
     public String login() {
         return "login" ;
     }
 
-    @GetMapping("/create_user")
+    @GetMapping("/home/create_user")
     public String create_User() {
         return "create_user";
     }
 
-    @GetMapping("/create_registerform")
+    @GetMapping("/home/create_registerform")
     public String create_Register(Model model) {
         model.addAttribute("newregister", new RegisterDTO());
         return "create_register";
     }
 
-    @GetMapping("/create_speakerform")
-    public String create_Speaker(Model model ) {
+    @GetMapping("/home/create_speakerform")
+    public String create_Speaker(Model model) {
         model.addAttribute("newspeaker", new SpeakerDTO());
         return "create_speaker";
     }
 
-    @RequestMapping("/user_home")
+    @RequestMapping("/home/user_home")
     public String defaultAfterLogin() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -69,13 +69,13 @@ public class BaseController {
 
         if (details != null && details.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            return "redirect:/admin_home";
+            return "redirect:/admin/home";
         }  else if (details != null && details.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_REGISTER"))) {
-            return "redirect:/register_home";
+            return "redirect:/register/home";
         } else if (details != null && details.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_SPEAKER"))) {
-            return "redirect:/speaker_home";
+            return "redirect:/speaker/home";
         } else  {
             return "redirect:/home";
         }

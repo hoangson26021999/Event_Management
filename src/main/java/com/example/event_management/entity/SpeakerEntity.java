@@ -14,7 +14,7 @@ public class SpeakerEntity {
     /*@Setter(AccessLevel.NONE)*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int speakerId ;
+    private long speakerId ;
 
     @Column
     private String speakerName ;

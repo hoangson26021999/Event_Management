@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class RegisterDTO {
 
-    private int register_id ;
+    private long register_id ;
     private String register_name ;
     private int register_age ;
     private String register_email ;

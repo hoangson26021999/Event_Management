@@ -30,9 +30,8 @@ public class RegisterValidator implements Validator {
         RegisterDTO appUserForm = (RegisterDTO) target;
 
         // Kiểm tra các field của AppUserForm.
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty.appUserForm.userName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.appUserForm.firstName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "NotEmpty.appUserForm.lastName");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account", "NotEmpty.appUserForm.accountName");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.appUserForm.name");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.appUserForm.email");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.appUserForm.password");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.appUserForm.confirmPassword");
@@ -46,7 +45,6 @@ public class RegisterValidator implements Validator {
                 // Email đã được sử dụng bởi tài khoản khác.
                 errors.rejectValue("email", "Duplicate.appUserForm.email");
             }
-
 
         if (!errors.hasFieldErrors("userName")) {
             RegisterEntity dbUser = registerRepository.findRegisterEntityByRegisterAccountName(appUserForm.getRegister_account_name());

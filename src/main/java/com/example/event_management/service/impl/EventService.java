@@ -40,8 +40,8 @@ public class EventService implements IEventService {
 
 
     @Override
-    public EventDTO getEventbyId(int id) {
-        return eventConverter.convertToDTO(eventRepository.getById(id));
+    public EventDTO getEventbyId(long id) {
+        return eventConverter.convertToDTO(eventRepository.getById((id)));
     }
 
     @Override
@@ -65,14 +65,14 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public void deleteEvent(int[] ids) {
-       for( int id : ids) {
+    public void deleteEvent(long[] ids) {
+       for( long id : ids) {
            eventRepository.deleteById(id);
        }
     }
 
     @Override
-    public void deleteOneEvent(int id) {
+    public void deleteOneEvent(long id) {
         eventRepository.deleteById(id);
     }
 

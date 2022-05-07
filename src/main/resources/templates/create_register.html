@@ -1,25 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://wwww.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-        <style>
-            th, td {
-                padding: 5px;
-            }
-            td span  {
-                font-size:90%;
-                font-style: italic;
-                color: red;
-            }
-            .error {
-                color: red;
-                font-style: italic;
-            }
-        </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<form th:action="@{/register}" th:object="${newregister}" method="POST">
+<form th:action="@{/create_register}" th:object="${newregister}" method="POST" >
+    <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name " th:field="${newregister.register_name}">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="age" class="form-label">Age:</label>
+        <input type="number" class="form-control" id="age" placeholder="Enter your age " th:field="${newregister.register_age}">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email " th:field="${newregister.register_email}">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="account" class="form-label">Account:</label>
+        <input type="text" class="form-control" id="account" placeholder="Enter your account name " th:field="${newregister.register_account_name}">
+    </div>
+    <div class="mb-3">
+        <label for="pwd" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" th:field="${newregister.register_account_password}" >
+    </div>
+    <!--<div class="mb-3">
+        <label for="cfpwd" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="cfpwd" placeholder="Enter confirm password" name="cfpswd" th:field="${newregister.register_account_password}" >
+    </div>-->
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a th:href="@{/}">Cancel</a>
+</form>
+
+
+<!--<form th:action="@{/register}" th:object="${newregister}" method="POST">
     <table>
         <tr>
             <td>Name</td>
@@ -30,8 +53,7 @@
         </tr>
         <tr>
             <td>Age</td>
-            <td><input type="number" th:field="${newregister.register_age}" /> </td>
-
+            <td><input type="Age" th:field="${newregister.register_age}" /> </td>
         </tr>
         <tr>
             <td>Email</td>
@@ -68,7 +90,7 @@
             </td>
         </tr>
     </table>
-</form>
+</form>-->
 
 </body>
 </html>

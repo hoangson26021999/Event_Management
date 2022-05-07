@@ -27,13 +27,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http    .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/home", "/home/**" ,"/login" , "/event_detail/**" ,"/create_event", "/create_user" , "/create_registerform" , "/create_speakerform" ).permitAll() // Cho phép tất cả mọi người truy cập vào các địa chỉ này
+                    .antMatchers("/admin/**" ).hasAuthority("ROLE_ADMIN")
+                    .antMatchers("/register/**" ).hasAuthority("ROLE_REGISTER")
+                    .antMatchers("/speaker/**" ).hasAuthority("ROLE_SPEAKER")
+                    .antMatchers("/" ,"/create_register","/create_speaker","/home/**" , "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" , "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js").permitAll() // Cho phép tất cả mọi người truy cập vào các địa chỉ này
                     .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
                     .and()
                 .formLogin()
-                    .loginPage("/login")
+                    .loginPage("/home/login")
                     .loginProcessingUrl("/j_spring_security_check")// Cho phép người dùng xác thực bằng form login
-                    .defaultSuccessUrl("/user_home")
+                    .defaultSuccessUrl("/home/user_home")
                     .permitAll() // Tất cả đều được truy cập vào địa chỉ này
                     .and()
                 .logout()

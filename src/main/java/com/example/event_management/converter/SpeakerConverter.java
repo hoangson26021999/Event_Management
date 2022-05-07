@@ -17,8 +17,11 @@ public class SpeakerConverter {
     EventConverter eventConverter;
 
     public SpeakerEntity toEntity (SpeakerDTO speakerDTO) {
+
                 SpeakerEntity a = new SpeakerEntity() ;
-                a.setSpeakerId(speakerDTO.getId());
+                if(speakerDTO.getId() !=0 ) {
+                    a.setSpeakerId(speakerDTO.getId());
+                }
                 a.setSpeakerName(speakerDTO.getSpeaker_name()) ;
                 a.setSpeakerAge(speakerDTO.getSpeaker_age())  ;
                 a.setSpeakerEmail(speakerDTO.getSpeaker_email());
@@ -29,6 +32,7 @@ public class SpeakerConverter {
     }
 
     public SpeakerDTO toDTO (SpeakerEntity speakerEntity) {
+
         SpeakerDTO a = new SpeakerDTO() ;
         a.setId(speakerEntity.getSpeakerId());
         a.setSpeaker_name(speakerEntity.getSpeakerName()) ;
