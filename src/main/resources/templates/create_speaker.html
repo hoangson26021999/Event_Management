@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org" >
 <head>
   <title>Title</title>
   <meta charset="utf-8">
@@ -43,41 +43,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
     <a th:href="@{/}">Cancel</a>
   </form>
-    <!--<form th:action="@{/speaker}" th:object="${newspeaker}" method="POST">
-      <table>
-        <tr>
-          <td>Name</td>
-          <td><input type="text" th:field="${newspeaker.speaker_name}" /></td>
-        </tr>
-        <tr>
-          <td>Age</td>
-          <td><input type="number" th:field="${newspeaker.speaker_age}" /> </td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td><input type="email" th:field="${newspeaker.speaker_email}" /> </td>
-        </tr>
-
-        <tr>
-          <td>Career</td>
-          <td><input type="text" th:field="${newspeaker.speaker_career}" /></td>
-        </tr>
-        <tr>
-          <td>Account Name </td>
-          <td><input type="text" th:field="${newspeaker.speaker_account_name}" /> </td>
-        </tr>-
-        <tr>
-          <td>Password</td>
-          <td><input type="text" th:field="${newspeaker.speaker_account_password}" /> </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="submit" value="Submit" />
-            <a th:href="@{/}">Cancel</a>
-          </td>
-        </tr>
-      </table>
-    </form>-->
 
   </body>
 </html>

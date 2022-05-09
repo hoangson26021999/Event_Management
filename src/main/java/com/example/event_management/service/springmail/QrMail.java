@@ -25,7 +25,7 @@ public class QrMail {
 
     public void sendQrMail(EventEntity event , RegisterEntity register) throws MessagingException {
 
-        qrCodeGenerate.setInput( Integer.toString((int) event.getEventId()) + register.getRegisterId());
+        qrCodeGenerate.setInput(  event.getEventId() + event.getEventName() + register.getRegisterId() + register.getRegisterAccountName());
         try {
             qrCodeGenerate.generateQrCode();
         } catch (IOException e) {

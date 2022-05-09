@@ -78,9 +78,8 @@ public class AdminController {
     // API chỉnh sửa thông tin event
 
     @PostMapping(value = {"/admin/event/{id}" })
-    public String editEvent( @ModelAttribute("editevent") EventDTO editevent, @PathVariable("id") int id) {
-        editevent.setEvent_id(id);
-        eventService.editEvent(editevent);
+    public String editEvent( @ModelAttribute("editevent") EventDTO editevent, @PathVariable("id") long id) {
+        eventService.editEvent(editevent, id);
         return "redirect:/admin/your_events";
     }
 

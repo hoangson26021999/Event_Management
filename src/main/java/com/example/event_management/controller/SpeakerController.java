@@ -29,6 +29,7 @@ public class SpeakerController {
     @GetMapping("/speaker/{id}")
     public String speakerEventDetail ( Model model ,@PathVariable("id") int id ) {
         model.addAttribute("event" , eventService.getEventbyId(id)) ;
+        model.addAttribute("speaker" , speakerService.getSpeakerbyId(eventService.getEventbyId(id).getEvent_speaker_id())) ;
         return "/speaker/speaker_event_detail" ;
     }
 

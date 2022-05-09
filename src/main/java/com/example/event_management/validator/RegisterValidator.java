@@ -16,12 +16,10 @@ public class RegisterValidator implements Validator {
     @Autowired
     RegisterRepository registerRepository ;
 
-    // common-validator library.
-    private EmailValidator emailValidator = EmailValidator.getInstance();
-
     @Override
     public boolean supports(Class<?> clazz) {
-        return false;
+
+        return RegisterDTO.class.isAssignableFrom(clazz);
     }
 
     @Override
@@ -30,33 +28,29 @@ public class RegisterValidator implements Validator {
         RegisterDTO appUserForm = (RegisterDTO) target;
 
         // Kiểm tra các field của AppUserForm.
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account", "NotEmpty.appUserForm.accountName");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.appUserForm.name");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.appUserForm.email");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.appUserForm.password");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.appUserForm.confirmPassword");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "NotEmpty.appUserForm.gender");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "countryCode", "NotEmpty.appUserForm.countryCode");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_account_name", "NotEmpty.newregister.register_account_name");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_name", "NotEmpty.newregister.register_name");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_email", "NotEmpty.newregister.register_email");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_account_password", "NotEmpty.newregister.register_account_password");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirm_password", "NotEmpty.newregister.confirm_password");
 
-        if (!this.emailValidator.isValid(appUserForm.getRegister_email())) {
-            // Email không hợp lệ.
-            errors.rejectValue("email", "Pattern.appUserForm.email");
-        } else if ( registerRepository.findRegisterEntityByRegisterEmail(appUserForm.getRegister_email()) != null) {
+
+      if ( registerRepository.findRegisterEntityByRegisterEmail(appUserForm.getRegister_email()) != null) {
                 // Email đã được sử dụng bởi tài khoản khác.
-                errors.rejectValue("email", "Duplicate.appUserForm.email");
+                errors.rejectValue("register_email", "Duplicate.newregister.register_email");
             }
 
         if (!errors.hasFieldErrors("userName")) {
             RegisterEntity dbUser = registerRepository.findRegisterEntityByRegisterAccountName(appUserForm.getRegister_account_name());
             if (dbUser != null) {
                 // Tên tài khoản đã bị sử dụng bởi người khác.
-                errors.rejectValue("userName", "Duplicate.appUserForm.userName");
+                errors.rejectValue("register_account_name", "Duplicate.newregister.register_account_name");
             }
         }
 
         if (!errors.hasErrors()) {
             if (!appUserForm.getConfirm_password().equals(appUserForm.getRegister_account_password())) {
-                errors.rejectValue("confirmPassword", "Match.appUserForm.confirmPassword");
+                errors.rejectValue("confirm_password", "Match.newregister.confirm_password");
             }
         }
     }

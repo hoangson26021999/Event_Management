@@ -47,6 +47,7 @@ public class RegisterService implements IRegisterService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetails)authentication.getPrincipal()).getUsername() ;
+
         RegisterEntity register =  registerRepository.findRegisterEntityByRegisterAccountName(username);
 
         List<EventDTO> list  = new ArrayList<>() ;
@@ -73,6 +74,20 @@ public class RegisterService implements IRegisterService {
     }
 
     @Override
+    public void cancel_event(long id) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = ((UserDetails)authentication.getPrincipal()).getUsername() ;
+
+        RegisterEntity register = registerRepository.findRegisterEntityByRegisterAccountName(username);
+        EventEntity event = eventRepository.getById(id);
+
+        event.getRegisters().remove(register);
+        eventRepository.save(event) ;
+
+    }
+
+    @Override
     public void deleteRegister(long[] ids) {
         for(long id : ids) {
             registerRepository.deleteById(id);
@@ -84,23 +99,20 @@ public class RegisterService implements IRegisterService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetails)authentication.getPrincipal()).getUsername() ;
-        RegisterEntity register =  registerRepository.findRegisterEntityByRegisterAccountName(username);
 
+        RegisterEntity register = registerRepository.findRegisterEntityByRegisterAccountName(username);
         EventEntity event = eventRepository.getById(event_id);
 
-        for (int i = 0 ; i < event.getRegisters().size() ; i++) {
-            if(register.getRegisterId() != event.getRegisters().get(i).getRegisterId() && i ==  event.getRegisters().size()-1 ) {
+        if(event.getRegisters().contains(register)) {
+            System.out.println(" Bạn đã đăng kí tham gia sự kiện này rồi.");
+        } else  {
+            event.getRegisters().add(register);
+            eventRepository.save(event) ;
 
-                event.getRegisters().add(register);
-                eventRepository.save(event);
-
-                try {
-                    qrmail.sendQrMail(event, register);
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-            } else {
-
+            try {
+                qrmail.sendQrMail(event, register);
+            } catch (MessagingException e) {
+                e.printStackTrace();
             }
         }
     }

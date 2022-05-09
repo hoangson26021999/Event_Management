@@ -13,6 +13,8 @@ public interface IRegisterService {
 
     RegisterDTO editRegister(RegisterDTO newRegister);
 
+    void cancel_event(long id);
+
     void deleteRegister(long[] ids);
 
     void registerEvent( long event_id);

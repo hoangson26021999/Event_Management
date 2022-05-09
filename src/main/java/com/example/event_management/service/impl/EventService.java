@@ -58,8 +58,13 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public EventDTO editEvent(EventDTO editEvent ) {
+    public EventDTO editEvent(EventDTO editEvent , long id ) {
+
+        editEvent.setEvent_id(id);
         EventEntity editedEvent = eventConverter.convertToEntity(editEvent);
+        editedEvent.setEvent_speaker(eventRepository.getById(id).getEvent_speaker());
+        editedEvent.setEvent_admin(eventRepository.getById(id).getEvent_admin());
+
         editedEvent = eventRepository.save(editedEvent) ;
         return eventConverter.convertToDTO(editedEvent) ;
     }

@@ -5,6 +5,7 @@ import com.example.event_management.service.IEventService;
 import com.example.event_management.service.IRegisterService;
 import com.example.event_management.service.ISpeakerService;
 import com.example.event_management.service.springmail.QrMail;
+import com.example.event_management.validator.RegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 @Controller
 public class RegisterController {
@@ -26,6 +28,9 @@ public class RegisterController {
 
     @Autowired
     private IEventService eventService ;
+
+    @Autowired
+    private RegisterValidator registerValidator;
 
     @GetMapping("/register/home")
     public String registerHome (Model model) {
@@ -55,14 +60,18 @@ public class RegisterController {
 // <------------------API------------------->
 
     @PostMapping("/create_register")
-    public String createRegister( Model model,  @ModelAttribute("newregister") @Validated RegisterDTO newregister, BindingResult result) {
+    public String createRegister(Model model, @ModelAttribute("newregister") RegisterDTO newregister, BindingResult result) {
+
+        registerValidator.validate(newregister , result);
+
         // Validate result
         if (result.hasErrors()) {
             model.addAttribute("newregister", new RegisterDTO());
-            return "redirect:/create_register";
+            return "create_register";
+        } else {
+            registerService.createRegister(newregister);
+            return "redirect:/home";
         }
-        registerService.createRegister(newregister);
-        return "redirect:/home";
     }
 
     @PutMapping("/register/{id}")
@@ -70,6 +79,13 @@ public class RegisterController {
     public RegisterDTO editRegister(@RequestBody RegisterDTO editedRegister , @PathVariable("id") int id ) {
         editedRegister.setRegister_id(id);
         return registerService.editRegister(editedRegister);
+    }
+
+
+    @PostMapping("/register/cancel_event/{id}")
+    public String cancelEvent( @PathVariable("id") long id) {
+        registerService.cancel_event(id);
+        return "redirect:/register/your_events";
     }
 
     @DeleteMapping("/register")
