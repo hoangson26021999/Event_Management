@@ -69,11 +69,6 @@ public class SpeakerService implements ISpeakerService {
         SpeakerEntity speakerEntity = speakerConverter.toEntity(newSpeaker) ;
         speakerEntity = speakerRepository.save(speakerEntity) ;
 
-        /*entityManager.getTransaction().begin();
-        long index = service.saveUser(user);
-        entityManager.getTransaction().commit();*/
-
-
         return speakerConverter.toDTO(speakerEntity) ;
     }
 

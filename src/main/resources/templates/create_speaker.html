@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://wwww.thymeleaf.org" >
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org" xmlns="http://www.w3.org/1999/html" >
 <head>
   <title>Title</title>
   <meta charset="utf-8">
@@ -10,35 +10,42 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<h1>Event Management - Create Speaker</h1>
   <form th:action="@{/create_speaker}" th:object="${newspeaker}" method="POST" >
     <div class="mb-3 mt-3">
       <label for="name" class="form-label">Speaker's name:</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter your name" th:field="${newspeaker.speaker_name}">
+      <input type="text" class="form-control" id="name" placeholder="Enter your name" th:field="*{speaker_name}">
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('speaker_name')}" th:errors="*{speaker_name}" >...</div>
     </div>
     <div class="mb-3 mt-3">
       <label for="age" class="form-label">Speaker's age:</label>
-      <input type="number" class="form-control" id="age" placeholder="Age " th:field="${newspeaker.speaker_age}">
+      <input type="number" class="form-control" id="age" placeholder="Age " th:field="*{speaker_age}" required>
     </div>
     <div class="mb-3 mt-3">
       <label for="email" class="form-label">Speaker's email:</label>
-      <input type="text" class="form-control" id="email" placeholder="Email" th:field="${newspeaker.speaker_email}">
+      <input type="email" class="form-control" id="email" placeholder="Email" th:field="*{speaker_email}">
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('speaker_email')}" th:errors="*{speaker_email}" >...</div>
     </div>
     <div class="mb-3 mt-3">
       <label for="career" class="form-label">Speaker's career :</label>
-      <input type="text" class="form-control" id="career" placeholder="Career" th:field="${newspeaker.speaker_career}">
+      <input type="text" class="form-control" id="career" placeholder="Career" th:field="*{speaker_career}">
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('speaker_career')}" th:errors="*{speaker_career}" >...</div>
     </div>
     <div class="mb-3">
       <label for="account" class="form-label">Account name :</label>
-      <input type="text" class="form-control" id="account" placeholder="Account" th:field="${newspeaker.speaker_account_name}" >
+      <input type="text" class="form-control" id="account" placeholder="Account" th:field="*{speaker_account_name}" >
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('speaker_account_name')}" th:errors="*{speaker_account_name}" >...</div>
     </div>
     <div class="mb-3">
       <label for="pwd" class="form-label">Password :</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Password"  th:field="${newspeaker.speaker_account_password}" >
+      <input type="password" class="form-control" id="pwd" placeholder="Password"  th:field="*{speaker_account_password}" >
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('speaker_account_password')}" th:errors="*{speaker_account_password}" >...</div>
     </div>
-   <!-- <div class="mb-3">
+    <div class="mb-3">
       <label for="cfpwd" class="form-label">Confirm Password :</label>
-      <input type="password" class="form-control" id="cfpwd" placeholder="Confirm Password"  th:field="${newspeaker.speaker_account_password}" >
-    </div>-->
+      <input type="password" class="form-control" id="cfpwd" placeholder="Confirm Password"  th:field="*{confirm_password}" >
+      <div class="alert alert-warning" th:if="${#fields.hasErrors('confirm_password')}" th:errors="*{confirm_password}" >...</div>
+    </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
     <a th:href="@{/}">Cancel</a>

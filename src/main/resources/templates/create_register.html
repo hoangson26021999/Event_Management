@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://wwww.thymeleaf.org" >
+<html xmlns:th="http://wwww.thymeleaf.org" xmlns="http://www.w3.org/1999/html" >
 <head>
     <title>Create Register</title>
     <meta charset="utf-8">
@@ -10,87 +10,45 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<h1>Event Management - Create Register</h1>
 <form th:action="@{/create_register}" th:object="${newregister}" method="POST" >
+
     <div class="mb-3 mt-3">
         <label for="name" class="form-label">Name:</label>
         <input type="text" class="form-control" id="name" placeholder="Enter your name " th:field="*{register_name}">
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('register_name')}" th:errors="*{register_name}" >...</div>
     </div>
+
     <div class="mb-3 mt-3">
         <label for="age" class="form-label">Age:</label>
-        <input type="number" class="form-control" id="age" placeholder="Enter your age " th:field="*{register_age}">
+        <input type="number" class="form-control" id="age" placeholder="Enter your age " th:field="*{register_age}" required>
     </div>
+
     <div class="mb-3 mt-3">
         <label for="email" class="form-label">Email:</label>
         <input type="email" class="form-control" id="email" placeholder="Enter your email " th:field="*{register_email}">
+        <div class="alert alert-warning"  th:if="${#fields.hasErrors('register_email')}" th:errors="*{register_email}" >...</div>
     </div>
+
     <div class="mb-3 mt-3">
         <label for="account" class="form-label">Account:</label>
         <input type="text" class="form-control" id="account" placeholder="Enter your account name " th:field="*{register_account_name}">
-    </div>
-    <div class="mb-3">
-        <label for="pwd" class="form-label">Password:</label>
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" th:field="*{register_account_password}" >
-    </div>
-    <div class="mb-3">
-        <label for="cfpwd" class="form-label">Password:</label>
-        <input type="password" class="form-control" id="cfpwd" placeholder="Enter confirm password" name="cfpswd" th:field="*{confirm_password}" >
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('register_account_name')}" th:errors="*{register_account_name}"  >...</div>
     </div>
 
+    <div class="mb-3">
+        <label for="pwd" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" th:field="*{register_account_password}">
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('register_account_password')}" th:errors="*{register_account_password}" >...</div>
+    </div>
+    <div class="mb-3">
+        <label for="cfpwd" class="form-label">Confirm Password:</label>
+        <input type="password" class="form-control" id="cfpwd" placeholder="Enter confirm password" name="cfpswd" th:field="*{confirm_password}" > </br>
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('confirm_password')}" th:errors="*{confirm_password}"  >...</div>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     <a th:href="@{/}">Cancel</a>
 </form>
-
-
-
-<!--<form th:action="@{/register}" th:object="${newregister}" method="POST">
-    <table>
-        <tr>
-            <td>Name</td>
-            <td><input type="text" th:field="${newregister.register_name}" /></td>
-            <td>
-                <span th:if="${#fields.hasErrors('userName')}" th:errors="${newregister.register_name}">..</span>
-            </td>
-        </tr>
-        <tr>
-            <td>Age</td>
-            <td><input type="Age" th:field="${newregister.register_age}" /> </td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><input type="email" th:field="${newregister.register_email}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('email')}" th:errors="${newregister.register_email}">..</span>
-            </td>
-        </tr>
-        <tr>
-            <td>Account Name </td>
-            <td><input type="text" th:field="${newregister.register_account_name}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('userName')}" th:errors="${newregister.register_account_name}">..</span>
-            </td>
-        </tr>-
-        <tr>
-            <td>Password</td>
-            <td><input type="text" th:field="${newregister.register_account_password}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="${newregister.register_account_password}">..</span>
-            </td>
-        </tr>
-        <tr>
-            <td>Confirm</td>
-            <td><input type="password" th:field="*{newregister.confirm_password}" /> </td>
-            <td>
-                <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="${newregister.confirm_password}">..</span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="Submit" />
-                <a th:href="@{/}">Cancel</a>
-            </td>
-        </tr>
-    </table>
-</form>-->
 
 </body>
 </html>

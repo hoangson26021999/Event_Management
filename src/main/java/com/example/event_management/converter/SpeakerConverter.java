@@ -5,6 +5,7 @@ import com.example.event_management.DTO.SpeakerDTO;
 import com.example.event_management.entity.EventEntity;
 import com.example.event_management.entity.SpeakerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Component
 public class SpeakerConverter {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     EventConverter eventConverter;
@@ -27,7 +31,7 @@ public class SpeakerConverter {
                 a.setSpeakerEmail(speakerDTO.getSpeaker_email());
                 a.setSpeakerCareer(speakerDTO.getSpeaker_career());
                 a.setSpeakerAccountName(speakerDTO.getSpeaker_account_name());
-                a.setSpeakerAccountPassword(speakerDTO.getSpeaker_account_password());
+                a.setSpeakerAccountPassword(passwordEncoder.encode(speakerDTO.getSpeaker_account_password()));
                 return a ;
     }
 
@@ -46,9 +50,7 @@ public class SpeakerConverter {
             list.add(eventConverter.convertToDTO(i));
         }
         a.setSpeaker_events(list);
-
         a.setSpeaker_account_name(speakerEntity.getSpeakerAccountName());
-        a.setSpeaker_account_password(speakerEntity.getSpeakerAccountPassword());
         return a ;
 
     }

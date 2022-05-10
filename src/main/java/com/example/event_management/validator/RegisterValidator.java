@@ -28,29 +28,29 @@ public class RegisterValidator implements Validator {
         RegisterDTO appUserForm = (RegisterDTO) target;
 
         // Kiểm tra các field của AppUserForm.
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_account_name", "NotEmpty.newregister.register_account_name");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_name", "NotEmpty.newregister.register_name");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_email", "NotEmpty.newregister.register_email");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_account_password", "NotEmpty.newregister.register_account_password");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirm_password", "NotEmpty.newregister.confirm_password");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_account_name", "NotEmpty.account_name");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_name", "NotEmpty.name");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_email", "NotEmpty.email");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "register_account_password", "NotEmpty.password");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirm_password", "NotEmpty.confirm_password");
 
 
       if ( registerRepository.findRegisterEntityByRegisterEmail(appUserForm.getRegister_email()) != null) {
                 // Email đã được sử dụng bởi tài khoản khác.
-                errors.rejectValue("register_email", "Duplicate.newregister.register_email");
+                errors.rejectValue("register_email", "Duplicate.email");
             }
 
         if (!errors.hasFieldErrors("userName")) {
             RegisterEntity dbUser = registerRepository.findRegisterEntityByRegisterAccountName(appUserForm.getRegister_account_name());
             if (dbUser != null) {
                 // Tên tài khoản đã bị sử dụng bởi người khác.
-                errors.rejectValue("register_account_name", "Duplicate.newregister.register_account_name");
+                errors.rejectValue("register_account_name", "Duplicate.account_name");
             }
         }
 
         if (!errors.hasErrors()) {
             if (!appUserForm.getConfirm_password().equals(appUserForm.getRegister_account_password())) {
-                errors.rejectValue("confirm_password", "Match.newregister.confirm_password");
+                errors.rejectValue("confirm_password", "Match.confirm_password");
             }
         }
     }

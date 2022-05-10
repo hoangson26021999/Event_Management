@@ -4,10 +4,12 @@ package com.example.event_management.controller;
 import com.example.event_management.DTO.SpeakerDTO;
 import com.example.event_management.service.IEventService;
 import com.example.event_management.service.ISpeakerService;
+import com.example.event_management.validator.SpeakerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,6 +21,9 @@ public class SpeakerController {
 
     @Autowired
     private IEventService eventService ;
+
+    @Autowired
+    private SpeakerValidator speakerValidator ;
 
     @GetMapping("/speaker/home")
     public String speakerHome (Model model) {
@@ -43,9 +48,19 @@ public class SpeakerController {
 
     // Tạo mới speaker
     @PostMapping("/create_speaker")
-    public String createSpeaker(@ModelAttribute("newspeaker") SpeakerDTO newSpeaker) {
-        speakerService.createSpeaker(newSpeaker);
-        return "redirect:/home";
+    public String createSpeaker(@ModelAttribute("newspeaker") SpeakerDTO newSpeaker , BindingResult result , Model model ) {
+
+        speakerValidator.validate(newSpeaker ,result);
+
+        // Validate result
+        if (result.hasErrors()) {
+            model.addAttribute("newregister", newSpeaker );
+            return "create_speaker";
+        } else {
+            speakerService.createSpeaker(newSpeaker);
+            return "redirect:/home";
+        }
+
     }
 
     @PutMapping("/speaker/{id}")

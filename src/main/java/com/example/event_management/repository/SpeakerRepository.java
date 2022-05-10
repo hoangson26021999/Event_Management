@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SpeakerRepository extends JpaRepository< SpeakerEntity, Long> {
 
     SpeakerEntity findSpeakerEntityBySpeakerAccountName(String name) ;
+    SpeakerEntity findSpeakerEntityBySpeakerEmail(String email) ;
+
 }

@@ -66,7 +66,7 @@ public class RegisterController {
 
         // Validate result
         if (result.hasErrors()) {
-            model.addAttribute("newregister", new RegisterDTO());
+            model.addAttribute("newregister", newregister );
             return "create_register";
         } else {
             registerService.createRegister(newregister);

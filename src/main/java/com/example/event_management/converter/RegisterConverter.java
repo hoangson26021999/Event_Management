@@ -4,10 +4,15 @@ import com.example.event_management.DTO.EventDTO;
 import com.example.event_management.DTO.RegisterDTO;
 import com.example.event_management.entity.EventEntity;
 import com.example.event_management.entity.RegisterEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RegisterConverter {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public RegisterEntity convertToEntity(RegisterDTO b) {
         RegisterEntity a = new RegisterEntity() ;
@@ -19,7 +24,7 @@ public class RegisterConverter {
         a.setRegisterAge(b.getRegister_age());
         a.setRegisterEmail(b.getRegister_email());
         a.setRegisterAccountName(b.getRegister_account_name());
-        a.setRegisterAccountPassword(b.getRegister_account_password());
+        a.setRegisterAccountPassword(passwordEncoder.encode(b.getRegister_account_password()));
         return a  ;
     }
 
