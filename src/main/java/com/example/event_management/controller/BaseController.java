@@ -43,11 +43,6 @@ public class BaseController {
         return "login" ;
     }
 
-    @GetMapping("/home/create_user")
-    public String create_User() {
-        return "create_user";
-    }
-
     @GetMapping("/home/create_registerform")
     public String create_Register(Model model) {
         model.addAttribute("newregister", new RegisterDTO());

@@ -34,13 +34,13 @@
             </ul>
         </div>
     </nav>
-    <form>
         <table class="table table-bordered" >
             <thead>
             <tr>
                 <th>Event's Name</th>
                 <th>Admin id</th>
                 <th>Speaker id</th>
+                <th>Check in</th>
                 <th>Chỉnh sửa</th>
                 <th>Delete</th>
             </tr>
@@ -49,6 +49,12 @@
                 <td th:utext="${event.event_name}">...</td>
                 <td th:utext="${event.event_admin_id}">...</td>
                 <td th:utext="${event.event_speaker_id}">...</td>
+                <td>
+                    <form th:action="@{'/admin/check_in/' + ${event.event_id}}" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file">
+                        <button id= "checkin "type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Check in</button>
+                    </form>
+                </td>
                 <td><a th:href="@{'/admin/event/' + ${event.event_id}}" >Chỉnh sửa thông tin </a></td>
                 <td>
                     <form th:action="@{'/admin/delete_event/' + ${event.event_id}}" method="post">
@@ -57,7 +63,28 @@
                 </td>
             </tr>
         </table>
-    </form>
+
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Check in sự kiện </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div th:if="'fail' == ${register}" class="modal-body">
+                    Thính giả không có tên trong danh sách tham gia sự kiện.
+                </div>
+                <div  th:if="'success' == ${register}" class="modal-body">
+                    Thính giả có tên trong danh sách đã đăng kí tham gia sự kiện.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
 

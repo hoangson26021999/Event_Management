@@ -1,18 +1,23 @@
 package com.example.event_management.service.qrcode;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.Map;
 
 @Service
 public class QrCodeGenerate {
@@ -44,6 +49,22 @@ public class QrCodeGenerate {
             System.out.print(pngByteArray[i]);
         }*/
 
+    }
+
+
+    // Function to read the QR file
+    public String readQR(String path, String charset, Map hashMap)  throws FileNotFoundException, IOException,  NotFoundException
+    {
+        BinaryBitmap binaryBitmap
+                = new BinaryBitmap(new HybridBinarizer(
+                new BufferedImageLuminanceSource(
+                        ImageIO.read(
+                                new FileInputStream(path)))));
+
+        Result result
+                = new MultiFormatReader().decode(binaryBitmap);
+
+        return result.getText();
     }
 
 }

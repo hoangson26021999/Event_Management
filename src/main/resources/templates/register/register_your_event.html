@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://wwww.thymeleaf.org">
 <head>
     <title>Register Your Event</title>
@@ -34,7 +33,6 @@
         </ul>
     </div>
 </nav>
-<form>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -63,8 +61,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Suy nghĩ lại</button>
-                                <form th:action="@{'/register/cancel_event/' + ${event.event_id}}" method="post">
-                                    <input class="btn btn-primary" type="submit" value="Xác nhận"/>
+                                <form th:action="@{'/register/cancel_event/' + ${event.event_id}}" method="POST">
+                                    <input class="btn btn-primary" type="submit" value="Không tham gia"/>
                                 </form>
                             </div>
                         </div>
@@ -73,8 +71,6 @@
             </td>
         </tr>
     </table>
-</form>
-
 </body>
 </html>
 

@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/admin/**" ).hasAuthority("ROLE_ADMIN")
                     .antMatchers("/register/**" ).hasAuthority("ROLE_REGISTER")
                     .antMatchers("/speaker/**" ).hasAuthority("ROLE_SPEAKER")
-                    .antMatchers("/" ,"/create_register","/create_speaker","/home/**" , "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" , "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js").permitAll() // Cho phép tất cả mọi người truy cập vào các địa chỉ này
+                    .antMatchers("/" ,"/create_register","/create_speaker","/home/**","https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" , "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" , "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js").permitAll() // Cho phép tất cả mọi người truy cập vào các địa chỉ này
                     .anyRequest().authenticated() // Tất cả các request khác đều cần phải xác thực mới được truy cập
                     .and()
                 .formLogin()

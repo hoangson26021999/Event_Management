@@ -25,32 +25,54 @@
                     <a class="nav-link" th:href="@{/home/login}">Đăng nhập</a> </br>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/home/create_user}">Đăng ký</a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Đăng ký
+                    </button>
                 </li>
             </ul>
         </div>
     </nav>
+
+<!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"> Đăng ký thành viên </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn muốn đăng ký loại thành viên nào ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy </button>
+                    <form th:action="@{/home/create_speakerform}" method="get">
+                        <input class="btn btn-primary" type="submit" value="Diễn giả"/>
+                    </form>
+                    <form th:action="@{/home/create_registerform}" method="get">
+                        <input class="btn btn-primary" type="submit" value="Thính giả"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <form>
         <table class="table table-bordered" >
             <thead>
                 <tr>
                     <th>Event's Name</th>
-                    <th>Admin id</th>
                     <th>Speaker id</th>
                     <th>Detail</th>
                 </tr>
             </thead>
             <tr th:each ="event : ${events}">
                     <td th:utext="${event.event_name}">...</td>
-                    <td th:utext="${event.event_admin_id}">...</td>
                     <td th:utext="${event.event_speaker_id}">...</td>
                     <td><a th:href="@{'/home/' + ${event.event_id}}" >Chi tiết</a></td>
             </tr>
         </table>
     </form>
-
-
 
 <!--<img th:src="@{/img/img.png}"  class="img-fluid" alt="Italian Trulli">-->
 

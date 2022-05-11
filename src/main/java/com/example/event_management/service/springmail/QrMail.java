@@ -1,5 +1,6 @@
 package com.example.event_management.service.springmail;
 
+import com.example.event_management.Encryption.Encryption;
 import com.example.event_management.entity.EventEntity;
 import com.example.event_management.entity.RegisterEntity;
 import com.example.event_management.service.qrcode.QrCodeGenerate;
@@ -18,6 +19,9 @@ import java.io.IOException;
 public class QrMail {
 
     @Autowired
+    Encryption encryption ;
+
+    @Autowired
     public JavaMailSender emailSender;
 
     @Autowired
@@ -25,7 +29,10 @@ public class QrMail {
 
     public void sendQrMail(EventEntity event , RegisterEntity register) throws MessagingException {
 
-        qrCodeGenerate.setInput(  event.getEventId() + event.getEventName() + register.getRegisterId() + register.getRegisterAccountName());
+        String input =  encryption.encrypt(Long.toString(event.getEventId())) + "::" + encryption.encrypt(Long.toString(register.getRegisterId())) ;
+        System.out.println(input);
+
+        qrCodeGenerate.setInput(input);
         try {
             qrCodeGenerate.generateQrCode();
         } catch (IOException e) {
@@ -41,7 +48,7 @@ public class QrMail {
         // attach the file into email body
         FileSystemResource file = new FileSystemResource(new File("src/main/resources/QrCode/QrTest.jpg"));
 
-        helper.setText("<img src=\"cid:logo.png\"></img><div>My logo</div>", true);
+        helper.setText("<img src=\"cid:logo.png\"></img>", true);
         helper.addInline("logo.png", file);
 
         this.emailSender.send(message);

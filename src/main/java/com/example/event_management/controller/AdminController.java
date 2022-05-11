@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 
 @EnableWebMvc
 @Controller
@@ -73,6 +75,18 @@ public class AdminController {
     public String createEvent( @ModelAttribute("newevent") EventDTO newevent) {
         eventService.createEvent(newevent);
         return "redirect:/admin/home" ;
+    }
+
+    // Check in
+    @PostMapping("/admin/check_in/{id}")
+    public String checkinEvent( Model model, @RequestParam(name = "file") MultipartFile file , @PathVariable("id") long id ) {
+        if(adminService.checkin(file,id)) {
+            model.addAttribute("register", "success");
+        } else  {
+            model.addAttribute("register", "fail");
+        }
+
+        return "/admin/admin_checkin";
     }
 
     // API chỉnh sửa thông tin event
