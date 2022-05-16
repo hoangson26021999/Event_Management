@@ -1,7 +1,7 @@
 package com.example.event_management.controller;
 
-import com.example.event_management.DTO.RegisterDTO;
-import com.example.event_management.DTO.SpeakerDTO;
+import com.example.event_management.dto.RegisterDTO;
+import com.example.event_management.dto.SpeakerDTO;
 import com.example.event_management.service.IEventService;
 import com.example.event_management.service.ISpeakerService;
 import org.springframework.beans.factory.annotation.Autowired;

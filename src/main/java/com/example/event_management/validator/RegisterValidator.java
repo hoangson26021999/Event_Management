@@ -2,8 +2,7 @@ package com.example.event_management.validator;
 
 import com.example.event_management.entity.RegisterEntity;
 import com.example.event_management.repository.RegisterRepository;
-import org.apache.commons.validator.routines.EmailValidator;
-import com.example.event_management.DTO.RegisterDTO;
+import com.example.event_management.dto.RegisterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

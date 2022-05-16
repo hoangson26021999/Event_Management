@@ -1,7 +1,7 @@
 package com.example.event_management.converter;
 
-import com.example.event_management.DTO.EventDTO;
-import com.example.event_management.DTO.SpeakerDTO;
+import com.example.event_management.dto.EventDTO;
+import com.example.event_management.dto.SpeakerDTO;
 import com.example.event_management.entity.EventEntity;
 import com.example.event_management.entity.SpeakerEntity;
 import org.springframework.beans.factory.annotation.Autowired;

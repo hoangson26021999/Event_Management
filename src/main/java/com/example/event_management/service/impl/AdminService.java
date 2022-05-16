@@ -1,7 +1,6 @@
 package com.example.event_management.service.impl;
 
-import com.example.event_management.DTO.AdminDTO;
-import com.example.event_management.DTO.EventDTO;
+import com.example.event_management.dto.EventDTO;
 import com.example.event_management.Encryption.Encryption;
 import com.example.event_management.converter.EventConverter;
 import com.example.event_management.entity.AdminEntity;
@@ -21,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

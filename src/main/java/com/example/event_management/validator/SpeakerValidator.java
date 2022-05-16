@@ -1,8 +1,6 @@
 package com.example.event_management.validator;
 
-import com.example.event_management.DTO.RegisterDTO;
-import com.example.event_management.DTO.SpeakerDTO;
-import com.example.event_management.entity.RegisterEntity;
+import com.example.event_management.dto.SpeakerDTO;
 import com.example.event_management.entity.SpeakerEntity;
 import com.example.event_management.repository.SpeakerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

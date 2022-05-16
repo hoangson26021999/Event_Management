@@ -1,6 +1,6 @@
 package com.example.event_management.service;
 
-import com.example.event_management.DTO.EventDTO;
+import com.example.event_management.dto.EventDTO;
 
 import java.util.List;
 

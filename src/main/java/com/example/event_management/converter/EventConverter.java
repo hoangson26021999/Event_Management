@@ -1,7 +1,6 @@
 package com.example.event_management.converter;
 
-import com.example.event_management.DTO.AdminDTO;
-import com.example.event_management.DTO.EventDTO;
+import com.example.event_management.dto.EventDTO;
 import com.example.event_management.entity.AdminEntity;
 import com.example.event_management.entity.EventEntity;
 import com.example.event_management.entity.SpeakerEntity;

@@ -15,28 +15,9 @@
 
     <h1>Event Management - Speaker Home </h1>
     <!-- A grey horizontal navbar that becomes vertical on small screens -->
-    <nav class="navbar navbar-expand-sm bg-light">
-        <div class="container-fluid">
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/speaker/home}">Home </a> </br>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/speaker/your_events}">Your Events</a> </br>
-                </li>
-                <li class="nav-item">
-                    <h5 th:inline="text">Xin chào bạn ! </h5>
-                </li>
-                <li class="nav-item">
-                    <form th:action="@{/logout}" method="post">
-                        <input  class="btn btn-outline-light text-dark" type="submit" value="Đăng xuất"/>
-                    </form>
-                </li>
 
-            </ul>
-        </div>
-    </nav>
+    <div th:insert="~{speaker/header/speaker_header :: speaker_header}"></div>
+
     <form>
         <table class="table table-bordered" >
             <thead>

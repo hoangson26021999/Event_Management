@@ -17,10 +17,12 @@
     <div class="mb-3 mt-3">
         <label for="name" class="form-label">Event's name:</label>
         <input type="text" class="form-control" id="name" placeholder="Enter event's name " th:field="${newevent.event_name}">
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('event_name')}" th:errors="*{event_name}" >...</div>
     </div>
     <div class="mb-3 mt-3">
         <label for="date" class="form-label">Running date:</label>
         <input type="date" class="form-control" id="date" placeholder="Enter running date " th:field="${newevent.event_date}">
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('event_date')}" th:errors="*{event_date}" >...</div>
     </div>
     <div class="mb-3 mt-3">
         <label for="speaker" class="form-label">Speaker:</label>
@@ -34,15 +36,18 @@
     <div class="mb-3 mt-3">
         <label for="account" class="form-label">Starting time :</label>
         <input type="text" class="form-control" id="account" placeholder="Enter event's starting time " th:field="${newevent.event_starting_time}">
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('event_starting_time')}" th:errors="*{event_starting_time}" >...</div>
     </div>
 
     <div class="mb-3">
         <label for="pwd" class="form-label">Ending time :</label>
         <input type="text" class="form-control" id="pwd" placeholder="Enter event's ending time " th:field="${newevent.event_ending_time}" >
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('event_ending_time')}" th:errors="*{event_ending_time}" >...</div>
     </div>
     <div class="mb-3">
         <label for="location" class="form-label">Location :</label>
         <input type="text" class="form-control" id="location" placeholder="Enter event's location "  th:field="${newevent.event_location}" >
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('event_location')}" th:errors="*{event_location}" >...</div>
     </div>
     
     <button type="submit" class="btn btn-primary">Submit</button>

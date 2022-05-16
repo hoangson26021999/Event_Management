@@ -44,7 +44,7 @@
             <td th:utext="${event.event_name}">...</td>
             <td>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Hủy tham gia
                 </button>
 
@@ -62,7 +62,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Suy nghĩ lại</button>
                                 <form th:action="@{'/register/cancel_event/' + ${event.event_id}}" method="POST">
-                                    <input class="btn btn-primary" type="submit" value="Không tham gia"/>
+                                    <input  class="btn btn-dark" type="submit" value="Không tham gia"/>
                                 </form>
                             </div>
                         </div>

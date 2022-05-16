@@ -1,6 +1,6 @@
 package com.example.event_management.controller;
 
-import com.example.event_management.DTO.RegisterDTO;
+import com.example.event_management.dto.RegisterDTO;
 import com.example.event_management.service.IEventService;
 import com.example.event_management.service.IRegisterService;
 import com.example.event_management.service.ISpeakerService;

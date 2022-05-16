@@ -1,4 +1,4 @@
-package com.example.event_management.DTO;
+package com.example.event_management.dto;
 
 import lombok.Data;
 import java.util.List;

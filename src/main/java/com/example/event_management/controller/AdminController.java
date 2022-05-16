@@ -1,12 +1,14 @@
 package com.example.event_management.controller;
 
-import com.example.event_management.DTO.EventDTO;
+import com.example.event_management.dto.EventDTO;
 import com.example.event_management.service.IAdminService;
 import com.example.event_management.service.IEventService;
 import com.example.event_management.service.ISpeakerService;
+import com.example.event_management.validator.EventValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -24,6 +26,9 @@ public class AdminController {
 
     @Autowired
     private ISpeakerService speakerService;
+
+    @Autowired
+    private EventValidator eventValidator;
 
     // Trả về trang admin home
 
@@ -72,9 +77,19 @@ public class AdminController {
     // API tạo mới event
 
     @PostMapping("/admin/event")
-    public String createEvent( @ModelAttribute("newevent") EventDTO newevent) {
-        eventService.createEvent(newevent);
-        return "redirect:/admin/home" ;
+    public String createEvent(@ModelAttribute("newevent") EventDTO newevent , BindingResult result , Model model) {
+
+        eventValidator.validate(newevent ,result);
+
+        // Validate result
+        if (result.hasErrors()) {
+            model.addAttribute("newevent", newevent );
+            model.addAttribute("speakers", speakerService.getAllSpeakers());
+            return "/admin/create_event" ;
+        } else {
+            eventService.createEvent(newevent);
+            return "redirect:/admin/home" ;
+        }
     }
 
     // Check in

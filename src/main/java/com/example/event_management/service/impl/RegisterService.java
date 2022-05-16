@@ -1,10 +1,9 @@
 package com.example.event_management.service.impl;
 
-import com.example.event_management.DTO.EventDTO;
-import com.example.event_management.DTO.RegisterDTO;
+import com.example.event_management.dto.EventDTO;
+import com.example.event_management.dto.RegisterDTO;
 import com.example.event_management.converter.EventConverter;
 import com.example.event_management.converter.RegisterConverter;
-import com.example.event_management.entity.AdminEntity;
 import com.example.event_management.entity.EventEntity;
 import com.example.event_management.entity.RegisterEntity;
 import com.example.event_management.repository.EventRepository;
@@ -16,10 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.PostConstruct;
 import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;

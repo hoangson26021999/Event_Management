@@ -1,12 +1,14 @@
 package com.example.event_management.controller;
 
 
-import com.example.event_management.DTO.SpeakerDTO;
+import com.example.event_management.dto.PresentationDTO;
+import com.example.event_management.dto.SpeakerDTO;
 import com.example.event_management.service.IEventService;
+import com.example.event_management.service.IPresentationService;
 import com.example.event_management.service.ISpeakerService;
+import com.example.event_management.validator.PresentationValidator;
 import com.example.event_management.validator.SpeakerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +26,12 @@ public class SpeakerController {
 
     @Autowired
     private SpeakerValidator speakerValidator ;
+
+    @Autowired
+    private IPresentationService presentationService ;
+
+    @Autowired
+    private PresentationValidator presentationValidator;
 
     @GetMapping("/speaker/home")
     public String speakerHome (Model model) {
@@ -44,7 +52,70 @@ public class SpeakerController {
         return "/speaker/speaker_your_event" ;
     }
 
+    @GetMapping("/speaker/your_presentations")
+    public String speakerYourPresentaion (Model model) {
+        model.addAttribute("presentations", speakerService.getPresentaionsbyId());
+        return "/speaker/speaker_presentation" ;
+    }
+
+    @GetMapping("/speaker/create_presentation_form")
+    public String speakerYourPresentaionForm (Model model) {
+        model.addAttribute("newpresentation", new PresentationDTO());
+        return "/speaker/speaker_create_presentation" ;
+    }
+
+    @GetMapping("/speaker/presentation_detail/{id}")
+    public String presentationDetail (Model model , @PathVariable("id") long id) {
+        model.addAttribute("presentation" , presentationService.getPresentationbyId(id)) ;
+        return "/presentation/presentation_detail" ;
+    }
+
+    @GetMapping("/speaker/presentation/{id}")
+    public String editPresentation(@PathVariable("id") long id , Model model) {
+        model.addAttribute("presentation",presentationService.getPresentationbyId(id)) ;
+        return "/speaker/speaker_edit_presentation";
+    }
+
 // <---------------API--------------------------->
+
+    @PostMapping("/speaker/create_presentation")
+    public String createPresentation(@ModelAttribute("presentation") PresentationDTO newPresentation , BindingResult result , Model model ) {
+
+        presentationValidator.validate(newPresentation ,result);
+
+        // Validate result
+        if (result.hasErrors()) {
+            model.addAttribute("presentation", newPresentation );
+            return "/speaker/speaker_create_presentation";
+        } else {
+            presentationService.createPresentation(newPresentation) ;
+            return "redirect:/speaker/your_presentations";
+        }
+
+    }
+
+    @PostMapping("/speaker/edit_presentation/{id}")
+    public String editPresentation(@ModelAttribute("presentation") PresentationDTO editPresentation , Model model , BindingResult result , @PathVariable("id") long id) {
+
+        presentationValidator.validate(editPresentation ,result);
+
+        // Validate result
+        if (result.hasErrors()) {
+            model.addAttribute("presentation", editPresentation );
+            return "/speaker/speaker_create_presentation";
+        } else {
+            presentationService.editPresentation(editPresentation ,id);
+            return "redirect:/speaker/your_presentations";
+        }
+    }
+
+    @PostMapping("/speaker/delete_presentation/{id}")
+    public String deletePresentation(@PathVariable("id") long id) {
+
+        presentationService.deletePresentationbyId(id);
+        return "redirect:/speaker/your_presentations" ;
+    }
+
 
     // Tạo mới speaker
     @PostMapping("/create_speaker")
@@ -54,13 +125,12 @@ public class SpeakerController {
 
         // Validate result
         if (result.hasErrors()) {
-            model.addAttribute("newregister", newSpeaker );
+            model.addAttribute("newspeaker", newSpeaker );
             return "create_speaker";
         } else {
             speakerService.createSpeaker(newSpeaker);
             return "redirect:/home";
         }
-
     }
 
     @PutMapping("/speaker/{id}")

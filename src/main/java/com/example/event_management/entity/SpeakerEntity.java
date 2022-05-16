@@ -16,13 +16,13 @@ public class SpeakerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long speakerId ;
 
-    @Column
+    @Column(nullable = false)
     private String speakerName ;
 
     @Column
     private int speakerAge ;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String speakerEmail ;
 
     @Column

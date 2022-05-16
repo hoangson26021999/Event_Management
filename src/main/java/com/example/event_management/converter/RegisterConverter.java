@@ -1,8 +1,6 @@
 package com.example.event_management.converter;
 
-import com.example.event_management.DTO.EventDTO;
-import com.example.event_management.DTO.RegisterDTO;
-import com.example.event_management.entity.EventEntity;
+import com.example.event_management.dto.RegisterDTO;
 import com.example.event_management.entity.RegisterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

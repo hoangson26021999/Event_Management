@@ -1,16 +1,13 @@
 package com.example.event_management.service.impl;
 
-import com.example.event_management.DTO.EventDTO;
-import com.example.event_management.DTO.RegisterDTO;
-import com.example.event_management.DTO.SpeakerDTO;
+import com.example.event_management.dto.EventDTO;
+import com.example.event_management.dto.PresentationDTO;
+import com.example.event_management.dto.SpeakerDTO;
 import com.example.event_management.converter.EventConverter;
+import com.example.event_management.converter.PresentationConverter;
 import com.example.event_management.converter.SpeakerConverter;
-import com.example.event_management.entity.AdminEntity;
-import com.example.event_management.entity.EventEntity;
-import com.example.event_management.entity.RegisterEntity;
-import com.example.event_management.entity.SpeakerEntity;
+import com.example.event_management.entity.*;
 import com.example.event_management.repository.SpeakerRepository;
-import com.example.event_management.service.IRegisterService;
 import com.example.event_management.service.ISpeakerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -37,6 +34,8 @@ public class SpeakerService implements ISpeakerService {
     @Autowired
     EntityManager entityManager ;
 
+    @Autowired
+    PresentationConverter presentationConverter ;
     @Override
     public List<SpeakerDTO> getAllSpeakers() {
 
@@ -46,6 +45,22 @@ public class SpeakerService implements ISpeakerService {
             list.add(speakerConverter.toDTO(s));
         }
         return list ;
+    }
+
+    @Override
+    public List<PresentationDTO> getPresentaionsbyId() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = ((UserDetails)authentication.getPrincipal()).getUsername() ;
+        SpeakerEntity speaker =  speakerRepository.findSpeakerEntityBySpeakerAccountName(username);
+
+        List<PresentationDTO> result = new ArrayList<>() ;
+
+        for (PresentationEntity p : speaker.getPresentations()) {
+            result.add(presentationConverter.toDTO(p)) ;
+        }
+
+        return result ;
     }
 
     @Override
