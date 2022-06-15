@@ -1,6 +1,7 @@
 package com.example.event_management.controller;
 
 
+import com.example.event_management.dto.EventDTO;
 import com.example.event_management.dto.PresentationDTO;
 import com.example.event_management.dto.SpeakerDTO;
 import com.example.event_management.service.IEventService;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
@@ -33,6 +36,26 @@ public class SpeakerController {
     @Autowired
     private PresentationValidator presentationValidator;
 
+    @GetMapping("/speaker_api/getEvsbySpId")
+    @ResponseBody
+    public List<EventDTO> speakerYourEvent () {
+        return speakerService.getEventsbySpeakerId();
+    }
+
+    @GetMapping("/speaker_api/getPresbySpId")
+    @ResponseBody
+    public List<PresentationDTO> speakerYourPresentaion () {
+        return speakerService.getPresentaionsbyId() ;
+    }
+
+    @GetMapping("/speaker_api/pres/{id}")
+    @ResponseBody
+    public PresentationDTO presentationDetail (@PathVariable("id") long id) {
+        return presentationService.getPresentationbyId(id) ;
+    }
+
+    //------------------------------------------------------------------------------
+
     @GetMapping("/speaker/home")
     public String speakerHome (Model model) {
         model.addAttribute("events", eventService.getAllEvents());
@@ -42,7 +65,7 @@ public class SpeakerController {
     @GetMapping("/speaker/{id}")
     public String speakerEventDetail ( Model model ,@PathVariable("id") int id ) {
         model.addAttribute("event" , eventService.getEventbyId(id)) ;
-        model.addAttribute("speaker" , speakerService.getSpeakerbyId(eventService.getEventbyId(id).getEvent_speaker_id())) ;
+        model.addAttribute("speaker" ,eventService.getEventbyId(id).getEvent_speaker()) ;
         return "/speaker/speaker_event_detail" ;
     }
 

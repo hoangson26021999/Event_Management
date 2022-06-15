@@ -17,8 +17,8 @@ public class SpeakerConverter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    EventConverter eventConverter;
+    /*@Autowired
+    EventConverter eventConverter;*/
 
     public SpeakerEntity toEntity (SpeakerDTO speakerDTO) {
 
@@ -45,10 +45,10 @@ public class SpeakerConverter {
         a.setSpeaker_career(speakerEntity.getSpeakerCareer());
 
         List<EventDTO> list = new ArrayList<>() ;
-        for (EventEntity i : speakerEntity.getEvents())
+        /*for (EventEntity i : speakerEntity.getEvents())
         {
             list.add(eventConverter.convertToDTO(i));
-        }
+        }*/
         a.setSpeaker_events(list);
         a.setSpeaker_account_name(speakerEntity.getSpeakerAccountName());
         return a ;

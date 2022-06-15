@@ -10,5 +10,6 @@ public interface IAdminService {
     List<EventDTO> getEventsbyAdminId() ;
 
     boolean checkin(MultipartFile file, long id) ;
+    boolean checkinbyCode(String code, long id) ;
 
 }

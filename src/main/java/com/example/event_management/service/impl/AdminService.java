@@ -83,13 +83,10 @@ public class AdminService implements IAdminService {
 
         // Encoding charset
         String charset = "UTF-8";
-
         Map<EncodeHintType, ErrorCorrectionLevel> hashMap  = new HashMap<>();
-
         hashMap.put(EncodeHintType.ERROR_CORRECTION,  ErrorCorrectionLevel.L);
 
         try {
-
            String a =  qrCodeGenerate.readQR("src/main/resources/QrCode/check/" + file.getOriginalFilename() ,charset ,hashMap) ;
            String event_id = encryption.decrypt(a.substring(0,24)) ;
            String register_id = encryption.decrypt(a.substring(26,50)) ;
@@ -106,5 +103,19 @@ public class AdminService implements IAdminService {
         }
 
         return true;
+    }
+
+    @Override
+    public boolean checkinbyCode(String code, long id) {
+
+            String event_id = encryption.decrypt(code.substring(0,24)) ;
+            String register_id = encryption.decrypt(code.substring(26,50)) ;
+
+            if(( Long.parseLong(event_id) == id ) && (eventRepository.getById(id).getRegisters().contains(registerRepository.getById(Long.parseLong(register_id)))) ) {
+                return true ;
+            } else {
+                return false ;
+            }
+
     }
 }

@@ -71,11 +71,15 @@ public class SpeakerService implements ISpeakerService {
     @Override
     public List<EventDTO> getEventsbySpeakerId() {
 
+        List<EventDTO> speaker_events = new ArrayList<>() ;
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetails)authentication.getPrincipal()).getUsername() ;
         SpeakerEntity speaker =  speakerRepository.findSpeakerEntityBySpeakerAccountName(username);
-
-        return speakerConverter.toDTO(speaker).getSpeaker_events() ;
+        for (EventEntity event : speaker.getEvents() ) {
+            speaker_events.add(eventConverter.convertToDTO(event)) ;
+        }
+        return speaker_events ;
     }
 
     @Override

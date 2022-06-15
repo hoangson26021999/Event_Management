@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class AdminDTO {
+    private Long admin_id ;
     private String admin_name ;
     private String admin_account_name ;
     private String admin_account_password ;

@@ -1,5 +1,6 @@
 package com.example.event_management.service.impl;
 
+import com.example.event_management.Encryption.Encryption;
 import com.example.event_management.dto.EventDTO;
 import com.example.event_management.dto.RegisterDTO;
 import com.example.event_management.converter.EventConverter;
@@ -22,6 +23,9 @@ import java.util.List;
 
 @Service
 public class RegisterService implements IRegisterService {
+
+    @Autowired
+    Encryption encryption ;
 
     @Autowired
     RegisterConverter registerConverter;
@@ -70,6 +74,17 @@ public class RegisterService implements IRegisterService {
     }
 
     @Override
+    public String getQrcodeValue(long id) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = ((UserDetails)authentication.getPrincipal()).getUsername() ;
+        RegisterEntity register =  registerRepository.findRegisterEntityByRegisterAccountName(username);
+
+        String input =  encryption.encrypt(Long.toString(id)) + "::" + encryption.encrypt(Long.toString(register.getRegisterId())) ;
+        return input;
+    }
+
+    @Override
     public void cancel_event(long id) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -91,7 +106,7 @@ public class RegisterService implements IRegisterService {
     }
 
     @Override
-    public void registerEvent(long event_id)  {
+    public void registerEvent(long event_id) throws Exception{
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = ((UserDetails)authentication.getPrincipal()).getUsername() ;
@@ -101,15 +116,16 @@ public class RegisterService implements IRegisterService {
 
         if(event.getRegisters().contains(register)) {
             System.out.println(" Bạn đã đăng kí tham gia sự kiện này rồi.");
+            throw new Exception();
         } else  {
             event.getRegisters().add(register);
             eventRepository.save(event) ;
 
-            try {
-                qrmail.sendQrMail(event, register);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                qrmail.sendQrMail(event, register);
+//            } catch (MessagingException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 }

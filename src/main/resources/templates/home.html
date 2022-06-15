@@ -22,6 +22,11 @@
                     <a class="nav-link" th:href="@{/home}">Home </a> </br>
                 </li>
                 <li class="nav-item">
+                    <div class="input-group rounded">
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" th:href="@{/home/login}">Đăng nhập</a> </br>
                 </li>
                 <li class="nav-item">
@@ -62,13 +67,13 @@
             <thead>
                 <tr>
                     <th>Event's Name</th>
-                    <th>Speaker id</th>
+                    <th>Speaker Name</th>
                     <th>Detail</th>
                 </tr>
             </thead>
             <tr th:each ="event : ${events}">
                     <td th:utext="${event.event_name}">...</td>
-                    <td th:utext="${event.event_speaker_id}">...</td>
+                    <td th:utext="${event.event_speaker.speaker_name}">...</td>
                     <td><a th:href="@{'/home/' + ${event.event_id}}" >Chi tiết</a></td>
             </tr>
         </table>

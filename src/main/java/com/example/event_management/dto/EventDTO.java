@@ -9,8 +9,8 @@ import java.sql.Time;
 public class EventDTO {
 
     private long event_id ;
-    private long event_admin_id ;
-    private long event_speaker_id ;
+    private AdminDTO event_admin;
+    private SpeakerDTO event_speaker ;
     private String event_name ;
     private Date event_date ;
     private Time event_starting_time ;

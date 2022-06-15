@@ -1,16 +1,14 @@
 package com.example.event_management.service.impl;
 
+import com.example.event_management.converter.AdminConverter;
 import com.example.event_management.dto.EventDTO;
 import com.example.event_management.converter.EventConverter;
-import com.example.event_management.entity.AdminEntity;
+import com.example.event_management.dto.EventFormDTO;
 import com.example.event_management.entity.EventEntity;
 import com.example.event_management.repository.AdminRepository;
 import com.example.event_management.repository.EventRepository;
 import com.example.event_management.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,6 +25,9 @@ public class EventService implements IEventService {
 
     @Autowired
     private AdminRepository adminRepository ;
+
+    @Autowired
+    private AdminConverter adminConverter ;
 
     @Override
     public List<EventDTO> getAllEvents() {
@@ -45,23 +46,22 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public EventDTO createEvent(EventDTO newEvent) {
+    public EventDTO createEvent(EventFormDTO newEvent) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = ((UserDetails)authentication.getPrincipal()).getUsername() ;
-        AdminEntity admin =  adminRepository.findAdminEntityByAdminAccountName(username);
-        newEvent.setEvent_admin_id(admin.getAdminId());
+        EventDTO a = eventConverter.FormToDTO(newEvent) ;
+        EventEntity newEventEntity = eventConverter.convertToEntity(a) ;
 
-        EventEntity newEventEntity = eventConverter.convertToEntity(newEvent) ;
         newEventEntity = eventRepository.save(newEventEntity) ;
         return eventConverter.convertToDTO(newEventEntity) ;
     }
 
     @Override
-    public EventDTO editEvent(EventDTO editEvent , long id ) {
+    public EventDTO editEvent(EventFormDTO editEvent , long id ) {
 
-        editEvent.setEvent_id(id);
-        EventEntity editedEvent = eventConverter.convertToEntity(editEvent);
+        EventDTO a = eventConverter.FormToDTO(editEvent) ;
+        a.setEvent_id(id);
+
+        EventEntity editedEvent = eventConverter.convertToEntity(a);
         editedEvent.setEvent_speaker(eventRepository.getById(id).getEvent_speaker());
         editedEvent.setEvent_admin(eventRepository.getById(id).getEvent_admin());
 

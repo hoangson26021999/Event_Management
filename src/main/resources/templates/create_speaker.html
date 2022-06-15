@@ -11,7 +11,9 @@
 </head>
 <body>
 <h1>Event Management - Create Speaker</h1>
-  <form th:action="@{/create_speaker}" th:object="${newspeaker}" method="POST" >
+
+  <div class="w-50 p-3" margin="0 auto" >
+  <form  th:action="@{/create_speaker}" th:object="${newspeaker}" method="POST" >
     <div class="mb-3 mt-3">
       <label for="name" class="form-label">Speaker's name:</label>
       <input type="text" class="form-control" id="name" placeholder="Enter your name" th:field="*{speaker_name}">
@@ -50,6 +52,8 @@
     <button type="submit" class="btn btn-primary">Submit</button>
     <a th:href="@{/}">Cancel</a>
   </form>
+
+  </div>
 
   </body>
 </html>

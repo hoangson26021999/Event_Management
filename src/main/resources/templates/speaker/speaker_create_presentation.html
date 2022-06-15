@@ -17,15 +17,15 @@
 
 <div th:insert="~{speaker/header/speaker_header :: speaker_header}"></div>
 
-<form th:action="@{/speaker/create_presentation}" th:object="${presentation}" method="POST">
+<form th:action="@{/speaker/create_presentation}" th:object="${newpresentation}" method="POST">
     <div class="mb-3 mt-3">
         <label for="name" class="form-label">Presentation's name:</label>
         <input type="text" class="form-control" id="name" placeholder="Enter Presentaiton's name " style="width: 820px"
-               th:field="${presentation.presentation_name}">
+               th:field="${newpresentation.presentation_name}">
     </div>
     <div class="mb-3 mt-3">
         <label for="name" class="form-label">Presentation's content:</label> </br>
-        <textarea id="content" name="content" placeholder="Content" th:field="${presentation.presentation_content}"
+        <textarea id="content" name="content" placeholder="Content" th:field="${newpresentation.presentation_content}"
                   style="width: 820px; height: 700px"> </textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

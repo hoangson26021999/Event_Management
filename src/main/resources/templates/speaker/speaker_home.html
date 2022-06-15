@@ -30,8 +30,8 @@
             </thead>
             <tr th:each ="event : ${events}">
                 <td th:utext="${event.event_name}">...</td>
-                <td th:utext="${event.event_admin_id}">...</td>
-                <td th:utext="${event.event_speaker_id}">...</td>
+                <td th:utext="${event.event_admin.admin_name}">...</td>
+                <td th:utext="${event.event_speaker.speaker_name}">...</td>
                 <td><a th:href="@{'/speaker/' + ${event.event_id}}" >Chi tiết</a></td>
             </tr>
         </table>

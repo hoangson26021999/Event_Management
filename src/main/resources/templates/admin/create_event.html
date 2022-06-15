@@ -26,9 +26,9 @@
     </div>
     <div class="mb-3 mt-3">
         <label for="speaker" class="form-label">Speaker:</label>
-        <select th:field="${newevent.event_speaker_id}" id= "speaker" class="form-select" >
+        <select th:field="${newevent.event_speaker}" id= "speaker" class="form-select" >
             <option th:each = "speaker : ${speakers}"
-                    th:value = "${speaker.id}"
+                    th:value = "${speaker}"
                     th:utext = "${speaker.speaker_name}">
             </option>
         </select>
@@ -51,42 +51,7 @@
     </div>
     
     <button type="submit" class="btn btn-primary">Submit</button>
-    <a th:href="@{/}">Cancel</a>
+    <a th:href="@{/admin/home}">Cancel</a>
 </form>
-<!--<form th:action="@{/admin/event}" th:object="${newevent}" method="POST">
-    <table>
-        <tr>
-            <td>Name</td>
-            <td><input type="text" th:field="${newevent.event_name}" /></td>
-        </tr>
-        <tr>
-            <td>Date</td>
-            <td><input type="date" th:field="${newevent.event_date}" /> </td>
-        </tr>
-        <tr>
-            <td>Speaker </td>
-            <td><input type="text" th:field="${newevent.event_speaker_id}" /> </td>
-        </tr>
-        <tr>
-            <td>Starting time</td>
-            <td><input type="text" th:field="${newevent.event_starting_time}" /> </td>
-        </tr>
-        <tr>
-            <td>Ending time</td>
-            <td><input type="text" th:field="${newevent.event_starting_time}" /> </td>
-        </tr>-
-        <tr>
-            <td>Location</td>
-            <td><input type="text" th:field="${newevent.event_location}" /> </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="Submit" />
-                <a th:href="@{/admin/home}">Cancel</a>
-            </td>
-        </tr>
-    </table>
-</form>-->
-
 </body>
 </html>

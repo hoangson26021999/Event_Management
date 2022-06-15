@@ -13,9 +13,11 @@ public interface IRegisterService {
 
     RegisterDTO editRegister(RegisterDTO newRegister);
 
+    String getQrcodeValue(long id) ;
+
     void cancel_event(long id);
 
     void deleteRegister(long[] ids);
 
-    void registerEvent( long event_id);
+    void registerEvent( long event_id) throws Exception;
 }

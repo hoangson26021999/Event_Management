@@ -20,14 +20,14 @@
         <thead>
         <tr>
             <th>Event's Name</th>
-            <th>Admin id</th>
-            <th>Speaker id</th>
+            <th>Admin </th>
+            <th>Speaker </th>
         </tr>
         </thead>
         <tr th:each ="event : ${events}">
             <td th:utext="${event.event_name}">...</td>
-            <td th:utext="${event.event_admin_id}">...</td>
-            <td th:utext="${event.event_speaker_id}">...</td>
+            <td th:utext="${event.event_admin.admin_name}">...</td>
+            <td th:utext="${event.event_speaker.speaker_name}">...</td>
         </tr>
     </table>
 </form>
